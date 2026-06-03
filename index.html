@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIENS 2Y28 — Tower Defense Roguelike</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-blue: #00d4ff;
+    --neon-green: #00ff88;
+    --neon-purple: #b84fff;
+    --neon-red: #ff3355;
+    --acid-green: #39ff14;
+    --neon-orange: #ff9500;
+    --bg-dark: #050810;
+    --bg-mid: #0a1020;
+    --bg-card: #0d1830;
+    --text-main: #c8ddf0;
+    --text-dim: #5a7a9a;
+    --border-glow: rgba(0, 212, 255, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ── SCANLINES OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.15) 2px,
+      rgba(0,0,0,0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── STAR FIELD ── */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) var(--delay, 0s) infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(0.8); }
+    to   { opacity: 0.9; transform: scale(1.2); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 60%, rgba(184,79,255,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(0,212,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 30% at 80% 20%, rgba(0,255,136,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Pixel ship silhouette */
+  .ship-silhouette {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 120px;
+    opacity: 0.15;
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(-20px); }
+  }
+
+  .year-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 6px;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 7rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title .aliens {
+    display: block;
+    color: #fff;
+    text-shadow:
+      0 0 20px rgba(0,212,255,0.8),
+      0 0 60px rgba(0,212,255,0.4),
+      0 0 120px rgba(0,212,255,0.2);
+  }
+  .hero-title .year {
+    display: block;
+    color: var(--neon-purple);
+    text-shadow:
+      0 0 20px rgba(184,79,255,0.9),
+      0 0 60px rgba(184,79,255,0.5);
+    font-size: 0.65em;
+  }
+
+  .hero-tagline {
+    margin-top: 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .badge {
+    padding: 6px 16px;
+    border: 1px solid;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .badge-blue  { border-color: var(--neon-blue);   color: var(--neon-blue);   box-shadow: 0 0 8px rgba(0,212,255,0.3); }
+  .badge-green { border-color: var(--neon-green);  color: var(--neon-green);  box-shadow: 0 0 8px rgba(0,255,136,0.3); }
+  .badge-purple{ border-color: var(--neon-purple); color: var(--neon-purple); box-shadow: 0 0 8px rgba(184,79,255,0.3); }
+  .badge-orange{ border-color: var(--neon-orange); color: var(--neon-orange); box-shadow: 0 0 8px rgba(255,149,0,0.3); }
+
+  .scroll-cta {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards, pulse 2s 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: #fff;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--neon-blue);
+    margin-top: 12px;
+    box-shadow: 0 0 10px var(--neon-blue);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), rgba(184,79,255,0.4), transparent);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── LORE ── */
+  .lore-block {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-left: 3px solid var(--neon-purple);
+    padding: 32px;
+    border-radius: 2px;
+    line-height: 1.9;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    box-shadow: inset 0 0 40px rgba(184,79,255,0.04);
+  }
+  .lore-block p + p { margin-top: 16px; }
+  .lore-block strong {
+    color: var(--neon-blue);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* ── GENRE GRID ── */
+  .genre-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .genre-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.1);
+    padding: 28px 24px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .genre-card:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.15);
+  }
+  .genre-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--accent, var(--neon-blue));
+    box-shadow: 0 0 12px var(--accent, var(--neon-blue));
+  }
+  .genre-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  .genre-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .genre-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ── GAMEPLAY LOOP ── */
+  .loop-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .loop-steps::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple), var(--acid-green));
+    box-shadow: 0 0 8px var(--neon-blue);
+  }
+  .loop-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    padding-left: 8px;
+  }
+  .step-dot {
+    width: 26px; height: 26px;
+    background: var(--bg-dark);
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--neon-blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0,212,255,0.4);
+    position: relative;
+    z-index: 1;
+  }
+  .step-content h4 {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .step-content p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ── TOWER CARDS ── */
+  .towers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  .tower-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.15);
+    padding: 20px 16px;
+    border-radius: 2px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .tower-card:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(0,212,255,0.2);
+  }
+  .tower-pixel {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 8px var(--tcolor, var(--neon-blue)));
+  }
+  .tower-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .tower-trait {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .tower-tag {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 2px 8px;
+    border: 1px solid var(--tcolor, var(--neon-blue));
+    color: var(--tcolor, var(--neon-blue));
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    border-radius: 1px;
+  }
+
+  /* ── ENEMY CARDS ── */
+  .enemies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .enemy-card {
+    background: linear-gradient(135deg, var(--bg-card), rgba(184,79,255,0.05));
+    border: 1px solid rgba(184,79,255,0.2);
+    padding: 20px 16px;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .enemy-card:hover {
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 20px rgba(184,79,255,0.2);
+    transform: translateY(-4px);
+  }
+  .enemy-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .enemy-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    color: var(--neon-purple);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .enemy-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* ── BOSS FEATURE ── */
+  .boss-feature {
+    background: linear-gradient(135deg, var(--bg-card), rgba(255,51,85,0.06));
+    border: 1px solid rgba(255,51,85,0.3);
+    border-radius: 2px;
+    padding: 40px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media(max-width:600px){ .boss-feature { grid-template-columns:1fr; } }
+  .boss-icon-big {
+    font-size: 5rem;
+    text-align: center;
+    filter: drop-shadow(0 0 20px rgba(255,51,85,0.6));
+    animation: bossFloat 4s ease-in-out infinite;
+  }
+  @keyframes bossFloat {
+    0%,100%{ transform: translateY(0) rotate(-2deg); }
+    50%    { transform: translateY(-12px) rotate(2deg); }
+  }
+  .boss-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--neon-red);
+    text-shadow: 0 0 20px rgba(255,51,85,0.5);
+    margin-bottom: 4px;
+  }
+  .boss-subtitle { font-family:'Share Tech Mono',monospace; font-size:0.7rem; color:var(--text-dim); letter-spacing:3px; margin-bottom:20px; }
+  .boss-abilities { list-style: none; }
+  .boss-abilities li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,51,85,0.1);
+    font-size: 0.9rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .boss-abilities li::before {
+    content: '▸';
+    color: var(--neon-red);
+    font-size: 0.8rem;
+  }
+
+  /* ── CARD RARITIES ── */
+  .rarities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .rarity-pill {
+    padding: 10px 24px;
+    border: 1px solid var(--rc);
+    color: var(--rc);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 2px;
+    box-shadow: 0 0 14px color-mix(in srgb, var(--rc) 30%, transparent);
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .rarity-pill:hover {
+    background: color-mix(in srgb, var(--rc) 10%, transparent);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--rc) 50%, transparent);
+    transform: scale(1.05);
+  }
+
+  /* ── MAPS ── */
+  .maps-chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .map-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+  }
+  .map-num {
+    width: 40px; height: 40px;
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    color: var(--neon-blue);
+    flex-shrink: 0;
+  }
+  .map-arrow {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    padding-left: 8px;
+    opacity: 0.4;
+  }
+  .map-info h4 {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+  .map-info p { font-size: 0.8rem; color: var(--text-dim); }
+  .map-locked { opacity: 0.4; }
+
+  /* ── RESOURCES ── */
+  .resources-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .resource-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.1);
+    padding: 28px 24px;
+    border-radius: 2px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.1);
+    border-color: var(--neon-blue);
+  }
+  .resource-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .resource-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .resource-use { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* ── TECH ── */
+  .tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+  .tech-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-main);
+    letter-spacing: 1px;
+  }
+  .tech-dot {
+    width: 8px; height: 8px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--neon-green);
+    animation: blink 1.5s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ── PILLARS ── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .pillar-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.1);
+    padding: 28px 20px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .pillar-card:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-4px);
+  }
+  .pillar-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--pc, var(--neon-blue)), transparent);
+    box-shadow: 0 0 8px var(--pc, var(--neon-blue));
+  }
+  .pillar-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--pc, var(--neon-blue));
+    opacity: 0.2;
+    position: absolute;
+    top: 12px; right: 16px;
+  }
+  .pillar-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .pillar-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 1px solid rgba(0,212,255,0.1);
+  }
+  .footer-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: #fff;
+    text-shadow: 0 0 30px rgba(0,212,255,0.5);
+    margin-bottom: 12px;
+  }
+  .footer-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+  .engine-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border: 1px solid rgba(0,212,255,0.3);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--neon-blue);
+    background: rgba(0,212,255,0.05);
+  }
+  .copyright {
+    margin-top: 40px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    opacity: 0.5;
+  }
+
+  /* ── GLITCH EFFECT ── */
+  @keyframes glitch {
+    0%   { clip-path: inset(40% 0 61% 0); transform: translate(-3px,0); }
+    20%  { clip-path: inset(92% 0 1%  0); transform: translate(3px,0); }
+    40%  { clip-path: inset(43% 0 1%  0); transform: translate(-3px,0); }
+    60%  { clip-path: inset(25% 0 58% 0); transform: translate(3px,0); }
+    80%  { clip-path: inset(54% 0 7%  0); transform: translate(-3px,0); }
+    100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
+  }
+  .glitch-wrap { position: relative; display: inline-block; }
+  .glitch-wrap::before,
+  .glitch-wrap::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+  .glitch-wrap:hover::before {
+    opacity: 0.7;
+    color: var(--neon-purple);
+    animation: glitch 0.4s steps(1) infinite;
+  }
+  .glitch-wrap:hover::after {
+    opacity: 0.7;
+    color: var(--neon-blue);
+    animation: glitch 0.4s steps(1) reverse infinite;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- NOISE OVERLAY -->
+<div class="noise-overlay"></div>
+
+<!-- STAR FIELD -->
+<div class="stars" id="stars"></div>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<div class="hero">
+
+  <!-- SVG Ship -->
+  <svg class="ship-silhouette" viewBox="0 0 340 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="170" cy="60" rx="160" ry="35" fill="rgba(184,79,255,0.15)" stroke="rgba(184,79,255,0.4)" stroke-width="1"/>
+    <ellipse cx="170" cy="58" rx="80" ry="18" fill="rgba(184,79,255,0.2)" stroke="rgba(184,79,255,0.5)" stroke-width="1"/>
+    <circle cx="110" cy="70" r="4" fill="rgba(0,212,255,0.8)"/>
+    <circle cx="170" cy="72" r="4" fill="rgba(0,212,255,0.8)"/>
+    <circle cx="230" cy="70" r="4" fill="rgba(0,212,255,0.8)"/>
+    <rect x="155" y="76" width="30" height="8" fill="rgba(184,79,255,0.3)" stroke="rgba(184,79,255,0.5)" stroke-width="0.5"/>
+    <line x1="10" y1="60" x2="330" y2="60" stroke="rgba(0,212,255,0.15)" stroke-width="1" stroke-dasharray="4 8"/>
+  </svg>
+
+  <div class="year-tag">// JANEIRO 2028 — INÍCIO DA INVASÃO</div>
+
+  <h1 class="hero-title">
+    <span class="aliens glitch-wrap" data-text="ALIENS">ALIENS</span>
+    <span class="year glitch-wrap" data-text="2Y28">2Y28</span>
+  </h1>
+
+  <p class="hero-tagline">// A INVASÃO COMEÇOU — A RESISTÊNCIA É A ÚLTIMA ESPERANÇA //</p>
+
+  <div class="badge-row">
+    <span class="badge badge-blue">Tower Defense</span>
+    <span class="badge badge-green">Roguelike</span>
+    <span class="badge badge-purple">Dark Sci-Fi</span>
+    <span class="badge badge-orange">Pixel Art 16-Bit</span>
+  </div>
+
+  <div class="scroll-cta">↓ ACESSAR DOSSIER ↓</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ HISTÓRIA ══════════════════ -->
+<section>
+  <div class="section-label">// RELATÓRIO CLASSIFICADO</div>
+  <h2 class="section-title">LORE — EVENTO ZERO</h2>
+  <div class="lore-block">
+    <p>Em <strong>JANEIRO DE 2028</strong>, enormes objetos apareceram em órbita terrestre. Sem qualquer comunicação, milhares de cápsulas caíram sobre o planeta, liberando organismos alienígenas capazes de transformar o ambiente em uma gigantesca colônia biológica.</p>
+    <p>Governos entraram em colapso. Grandes cidades foram destruídas. Milhões desapareceram. Os sobreviventes organizaram pequenas células de resistência.</p>
+    <p>Você assume o papel de um <strong>COMANDANTE</strong> responsável por proteger uma das últimas fortalezas humanas. Cada decisão importa. Cada torre construída pode ser a diferença entre a extinção e a sobrevivência.</p>
+    <p><strong>MISSÃO:</strong> Sobreviver. Evoluir. Recuperar a Terra.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ GÊNERO ══════════════════ -->
+<section>
+  <div class="section-label">// CLASSIFICAÇÃO TÁTICA</div>
+  <h2 class="section-title">GÊNEROS & ENGINE</h2>
+  <div class="genre-grid">
+    <div class="genre-card" style="--accent: var(--neon-blue)">
+      <div class="genre-icon">🏰</div>
+      <div class="genre-name">Tower Defense</div>
+      <div class="genre-desc">Posicione torres estrategicamente para barrar ondas de invasores alienígenas cada vez mais perigosas.</div>
+    </div>
+    <div class="genre-card" style="--accent: var(--neon-green)">
+      <div class="genre-icon">🃏</div>
+      <div class="genre-name">Roguelike</div>
+      <div class="genre-desc">Sistema de cartas aleatórias garante que cada partida seja uma experiência única e irrepetível.</div>
+    </div>
+    <div class="genre-card" style="--accent: var(--neon-purple)">
+      <div class="genre-icon">⚡</div>
+      <div class="genre-name">Estratégia RTS</div>
+      <div class="genre-desc">Decisões em tempo real sobre posicionamento, upgrading e gerenciamento de recursos escassos.</div>
+    </div>
+    <div class="genre-card" style="--accent: var(--neon-red)">
+      <div class="genre-icon">🌍</div>
+      <div class="genre-name">Survival</div>
+      <div class="genre-desc">Sobreviva com recursos limitados, tecnologia improvisada e a ameaça constante do aniquilamento.</div>
+    </div>
+    <div class="genre-card" style="--accent: var(--acid-green)">
+      <div class="genre-icon">🎮</div>
+      <div class="genre-name">Godot 4</div>
+      <div class="genre-desc">Engine open-source de alto desempenho para 2D, com excelente suporte a Pixel Art e exportação multiplataforma.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ GAMEPLAY LOOP ══════════════════ -->
+<section>
+  <div class="section-label">// PROTOCOLO DE COMBATE</div>
+  <h2 class="section-title">GAMEPLAY LOOP</h2>
+  <div class="loop-steps">
+    <div class="loop-step">
+      <div class="step-dot">01</div>
+      <div class="step-content">
+        <h4>INÍCIO DA MISSÃO</h4>
+        <p>Escolha sua torre inicial e inicie com recursos limitados. Posicione suas defesas com sabedoria.</p>
+      </div>
+    </div>
+    <div class="loop-step">
+      <div class="step-dot">02</div>
+      <div class="step-content">
+        <h4>ONDAS DE INVASORES</h4>
+        <p>Inimigos surgem em ondas. Torres atacam automaticamente. Cada alien eliminado gera recursos valiosos.</p>
+      </div>
+    </div>
+    <div class="loop-step">
+      <div class="step-dot">03</div>
+      <div class="step-content">
+        <h4>SELEÇÃO DE CARTA</h4>
+        <p>Ao subir de nível, escolha 1 de 3 cartas aleatórias. Nova torre, melhoria ou tecnologia alienígena.</p>
+      </div>
+    </div>
+    <div class="loop-step">
+      <div class="step-dot">04</div>
+      <div class="step-content">
+        <h4>EXPANSÃO E EVOLUÇÃO</h4>
+        <p>Use recursos para construir mais estruturas, fortalecer a base e preparar defesas para a próxima onda.</p>
+      </div>
+    </div>
+    <div class="loop-step">
+      <div class="step-dot">05</div>
+      <div class="step-content">
+        <h4>CHEFE FINAL / DERROTA</h4>
+        <p>Survive long enough to face the boss. Se a Base Principal cair, a partida termina — mas o progresso permanece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ TORRES ══════════════════ -->
+<section>
+  <div class="section-label">// ARSENAL DE DEFESA</div>
+  <h2 class="section-title">TORRES</h2>
+  <div class="towers-grid">
+    <div class="tower-card" style="--tcolor: var(--text-dim)">
+      <div class="tower-pixel" style="--tcolor:var(--text-dim)">🔫</div>
+      <div class="tower-name">BALÍSTICA</div>
+      <div class="tower-trait">Baixo custo · Alta velocidade</div>
+      <div class="tower-tag">PADRÃO</div>
+    </div>
+    <div class="tower-card" style="--tcolor: var(--neon-blue)">
+      <div class="tower-pixel">🔵</div>
+      <div class="tower-name">LASER</div>
+      <div class="tower-trait">Dano contínuo · Anti-rápidos</div>
+      <div class="tower-tag" style="--tcolor:var(--neon-blue)">ENERGIA</div>
+    </div>
+    <div class="tower-card" style="--tcolor: var(--neon-blue)">
+      <div class="tower-pixel">⚡</div>
+      <div class="tower-name">TESLA</div>
+      <div class="tower-trait">Corrente elétrica · Multi-alvo</div>
+      <div class="tower-tag" style="--tcolor:var(--neon-blue)">ÁREA</div>
+    </div>
+    <div class="tower-card" style="--tcolor: var(--neon-orange)">
+      <div class="tower-pixel">🔥</div>
+      <div class="tower-name">PLASMA</div>
+      <div class="tower-trait">Alto dano · Chance de explosão</div>
+      <div class="tower-tag" style="--tcolor:var(--neon-orange)">IMPACTO</div>
+    </div>
+    <div class="tower-card" style="--tcolor: var(--neon-blue)">
+      <div class="tower-pixel">❄️</div>
+      <div class="tower-name">CRIOGÊNICA</div>
+      <div class="tower-trait">Lentidão · Controle de grupo</div>
+      <div class="tower-tag" style="--tcolor: #88ddff">CONTROLE</div>
+    </div>
+    <div class="tower-card" style="--tcolor: var(--neon-red)">
+      <div class="tower-pixel">🚀</div>
+      <div class="tower-name">MÍSSIL</div>
+      <div class="tower-trait">Longo alcance · Dano em área</div>
+      <div class="tower-tag" style="--tcolor:var(--neon-red)">LONGO RAJE</div>
+    </div>
+    <div class="tower-card" style="--tcolor: var(--neon-purple)">
+      <div class="tower-pixel">🧬</div>
+      <div class="tower-name">SIMBIÓTICA</div>
+      <div class="tower-trait">Híbrida humano-alien · Evolui sozinha</div>
+      <div class="tower-tag" style="--tcolor:var(--neon-purple)">ALIENÍGENA</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ INIMIGOS ══════════════════ -->
+<section>
+  <div class="section-label">// RELATÓRIO DE AMEAÇAS</div>
+  <h2 class="section-title">INIMIGOS IDENTIFICADOS</h2>
+  <div class="enemies-grid">
+    <div class="enemy-card">
+      <div class="enemy-icon">🛸</div>
+      <div class="enemy-name">DRONE EXPLORADOR</div>
+      <div class="enemy-desc">Rápido e frágil. Unidade de reconhecimento. Perigoso em grandes grupos.</div>
+    </div>
+    <div class="enemy-card">
+      <div class="enemy-icon">👾</div>
+      <div class="enemy-name">GUERREIRO ALIEN</div>
+      <div class="enemy-desc">Unidade equilibrada. Dano e resistência medianos. Forma o núcleo das ondas.</div>
+    </div>
+    <div class="enemy-card">
+      <div class="enemy-icon">🤖</div>
+      <div class="enemy-name">TANQUE BIOMECÂNICO</div>
+      <div class="enemy-desc">Alta vida. Movimento lento. Absorve enormes quantidades de dano antes de cair.</div>
+    </div>
+    <div class="enemy-card">
+      <div class="enemy-icon">🦠</div>
+      <div class="enemy-name">PARASITA</div>
+      <div class="enemy-desc">Divide-se ao morrer, gerando novos inimigos. Eliminar cedo é crucial.</div>
+    </div>
+    <div class="enemy-card">
+      <div class="enemy-icon">💥</div>
+      <div class="enemy-name">KAMIKAZE</div>
+      <div class="enemy-desc">Explode ao atingir estruturas. Causa dano massivo em área. Eliminar à distância.</div>
+    </div>
+    <div class="enemy-card">
+      <div class="enemy-icon">✈️</div>
+      <div class="enemy-name">NAVE DE ASSALTO</div>
+      <div class="enemy-desc">Unidade voadora. Ignora obstáculos. Requer torres com alcance aéreo.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ BOSS ══════════════════ -->
+<section>
+  <div class="section-label">// ALERTA DE AMEAÇA MÁXIMA</div>
+  <h2 class="section-title">CHEFE — MAPA 1</h2>
+  <div class="boss-feature">
+    <div class="boss-icon-big">🌾👻</div>
+    <div>
+      <div class="boss-name">O ESPANTALHO</div>
+      <div class="boss-subtitle">// ENTIDADE CLASSE ALPHA — FAZENDA HOLLOW CREEK</div>
+      <p style="font-size:0.9rem; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">
+        Criatura formada pela fusão grotesca de equipamentos agrícolas abandonados, biomassa humana e tecnologia alienígena. Guarda os campos de milho de Hollow Creek com brutalidade implacável.
+      </p>
+      <ul class="boss-abilities">
+        <li>Invoca ondas de Parasitas durante o combate</li>
+        <li>Regeneração passiva de vida</li>
+        <li>Espinhos Biológicos causam dano de retorno</li>
+      </ul>
+      <br>
+      <div style="font-family:'Share Tech Mono',monospace; font-size:0.7rem; color:var(--text-dim); letter-spacing:2px;">
+        PRÓXIMOS CHEFES: ARAUTO DA COLMEIA · LEVIATÃ MECÂNICO · RAINHA DEVORADORA · IMPERADOR CÓSMICO
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ CARTAS / RARIDADES ══════════════════ -->
+<section>
+  <div class="section-label">// SISTEMA DE PROGRESSÃO</div>
+  <h2 class="section-title">CARTAS & RARIDADES</h2>
+  <p style="color:var(--text-dim); font-size:0.9rem; line-height:1.7; margin-bottom:36px; max-width:600px;">
+    Ao subir de nível, o jogo pausa e apresenta <strong style="color:#fff">3 cartas aleatórias</strong>. Você escolhe apenas uma. As cartas concedem novas torres, melhorias de combate, utilidades ou tecnologias alienígenas raras.
+  </p>
+  <div class="rarities-grid">
+    <div class="rarity-pill" style="--rc: #9e9e9e">COMUM</div>
+    <div class="rarity-pill" style="--rc: var(--neon-green)">INCOMUM</div>
+    <div class="rarity-pill" style="--rc: var(--neon-blue)">RARA</div>
+    <div class="rarity-pill" style="--rc: var(--neon-purple)">ÉPICA</div>
+    <div class="rarity-pill" style="--rc: var(--neon-orange)">LENDÁRIA</div>
+    <div class="rarity-pill" style="--rc: var(--acid-green)">👽 ALIENÍGENA</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ MAPAS ══════════════════ -->
+<section>
+  <div class="section-label">// TEATRO DE OPERAÇÕES</div>
+  <h2 class="section-title">MAPAS</h2>
+  <div class="maps-chain">
+    <div class="map-item">
+      <div class="map-num">01</div>
+      <div class="map-info">
+        <h4>🌽 FAZENDA HOLLOW CREEK</h4>
+        <p>Campo de milho. Noturno. Névoa rasteira. Celeiros abandonados.</p>
+      </div>
+    </div>
+    <div class="map-arrow">↓</div>
+    <div class="map-item">
+      <div class="map-num">02</div>
+      <div class="map-info">
+        <h4>🏙️ CIDADE EVACUADA</h4>
+        <p>Metrópole destruída. Ruas cobertas de biomassa alienígena.</p>
+      </div>
+    </div>
+    <div class="map-arrow">↓</div>
+    <div class="map-item">
+      <div class="map-num">03</div>
+      <div class="map-info">
+        <h4>🪖 BASE MILITAR ABANDONADA</h4>
+        <p>Instalação secreta. Tecnologia avançada. Perigos desconhecidos.</p>
+      </div>
+    </div>
+    <div class="map-arrow">↓</div>
+    <div class="map-item map-locked">
+      <div class="map-num">04</div>
+      <div class="map-info">
+        <h4>🏭 COMPLEXO INDUSTRIAL CONTAMINADO</h4>
+        <p>Zona restrita. Desbloqueio requer sobreviver 20 minutos no mapa anterior.</p>
+      </div>
+    </div>
+    <div class="map-arrow">↓</div>
+    <div class="map-item map-locked">
+      <div class="map-num">05</div>
+      <div class="map-info">
+        <h4>☢️ ZONA ZERO</h4>
+        <p>Epicentro da invasão. Destino final. Desafio máximo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ RECURSOS ══════════════════ -->
+<section>
+  <div class="section-label">// GERENCIAMENTO DE RECURSOS</div>
+  <h2 class="section-title">RECURSOS</h2>
+  <div class="resources-row">
+    <div class="resource-card">
+      <div class="resource-icon">⚙️</div>
+      <div class="resource-name">METAL</div>
+      <div class="resource-use">Construção de torres e estruturas. Melhorias da base principal e secundária.</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">⚡</div>
+      <div class="resource-name">ENERGIA</div>
+      <div class="resource-use">Alimenta torres avançadas, escudos e tecnologias especiais de alto custo.</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">🧬</div>
+      <div class="resource-name">TEC. ALIEN</div>
+      <div class="resource-use">Drop raro de chefes. Desbloqueia tecnologias híbridas e torres simbióticas únicas.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ PILARES ══════════════════ -->
+<section>
+  <div class="section-label">// FILOSOFIA DO PROJETO</div>
+  <h2 class="section-title">PILARES DO DESIGN</h2>
+  <div class="pillars-grid">
+    <div class="pillar-card" style="--pc: var(--neon-blue)">
+      <div class="pillar-num">01</div>
+      <div class="pillar-name">REJOGABILIDADE</div>
+      <div class="pillar-desc">Cada partida gera combinações únicas de cartas, inimigos e situações estratégicas.</div>
+    </div>
+    <div class="pillar-card" style="--pc: var(--neon-green)">
+      <div class="pillar-num">02</div>
+      <div class="pillar-name">EVOLUÇÃO CONSTANTE</div>
+      <div class="pillar-desc">Sempre existe algo novo para desbloquear via meta-progressão e loja de pesquisa.</div>
+    </div>
+    <div class="pillar-card" style="--pc: var(--neon-orange)">
+      <div class="pillar-num">03</div>
+      <div class="pillar-name">FANTASIA DE RESISTÊNCIA</div>
+      <div class="pillar-desc">O jogador sente que está reconstruindo a humanidade, uma torre de cada vez.</div>
+    </div>
+    <div class="pillar-card" style="--pc: var(--neon-purple)">
+      <div class="pillar-num">04</div>
+      <div class="pillar-name">ATMOSFERA DARK ALIEN</div>
+      <div class="pillar-desc">A invasão está presente em tudo: arte, sons, interface, inimigos e cenários.</div>
+    </div>
+    <div class="pillar-card" style="--pc: var(--neon-red)">
+      <div class="pillar-num">05</div>
+      <div class="pillar-name">PROGRESSÃO SATISFATÓRIA</div>
+      <div class="pillar-desc">Cada partida contribui para o progresso permanente da conta, mesmo em derrota.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="footer-title glitch-wrap" data-text="ALIENS 2Y28">ALIENS 2Y28</div>
+  <div class="footer-sub">// EM DESENVOLVIMENTO — PC (WINDOWS / LINUX)</div>
+  <div class="engine-badge">
+    <div class="tech-dot"></div>
+    DESENVOLVIDO EM GODOT 4 ENGINE
+  </div>
+  <div class="copyright">© 2028 RESISTANCE COMMAND — CLASSIFIED DOCUMENT — ALL RIGHTS RESERVED</div>
+</footer>
+
+<script>
+  // Generate star field
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 200; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left: ${Math.random()*100}%;
+      top: ${Math.random()*100}%;
+      --d: ${2 + Math.random()*4}s;
+      --delay: ${Math.random()*4}s;
+      width: ${Math.random() > 0.8 ? 3 : 2}px;
+      height: ${Math.random() > 0.8 ? 3 : 2}px;
+      opacity: ${0.1 + Math.random()*0.5};
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Intersection observer for fade-in sections
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(30px)';
+    s.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    obs.observe(s);
+  });
+</script>
+</body>
+</html>
