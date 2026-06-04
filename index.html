@@ -181,6 +181,94 @@
   .badge-purple{ border-color: var(--neon-purple); color: var(--neon-purple); box-shadow: 0 0 8px rgba(184,79,255,0.3); }
   .badge-orange{ border-color: var(--neon-orange); color: var(--neon-orange); box-shadow: 0 0 8px rgba(255,149,0,0.3); }
 
+  /* ── DOWNLOAD BUTTON ── */
+  .download-wrap {
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.0s forwards;
+  }
+  .download-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 52px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(184,79,255,0.12));
+    border: 1px solid var(--neon-blue);
+    color: #fff;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow:
+      0 0 20px rgba(0,212,255,0.25),
+      0 0 60px rgba(0,212,255,0.1),
+      inset 0 0 30px rgba(0,212,255,0.05);
+  }
+  .download-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(184,79,255,0.15));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .download-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    transition: left 0.5s ease;
+  }
+  .download-btn:hover {
+    border-color: var(--neon-blue);
+    color: #fff;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+      0 0 30px rgba(0,212,255,0.5),
+      0 0 80px rgba(0,212,255,0.2),
+      0 8px 30px rgba(0,0,0,0.4),
+      inset 0 0 40px rgba(0,212,255,0.1);
+  }
+  .download-btn:hover::before { opacity: 1; }
+  .download-btn:hover::after  { left: 140%; }
+  .download-btn:active {
+    transform: translateY(-1px) scale(0.99);
+    box-shadow:
+      0 0 20px rgba(0,212,255,0.4),
+      0 4px 15px rgba(0,0,0,0.4);
+  }
+  .download-icon {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+    animation: downloadBounce 2s ease-in-out infinite;
+  }
+  @keyframes downloadBounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(3px); }
+  }
+  .download-btn span {
+    position: relative;
+    z-index: 1;
+  }
+  .download-sub {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+  }
+
   .scroll-cta {
     position: absolute;
     bottom: 32px;
@@ -191,7 +279,7 @@
     letter-spacing: 4px;
     color: var(--text-dim);
     opacity: 0;
-    animation: fadeUp 0.8s 1.2s forwards, pulse 2s 2s infinite;
+    animation: fadeUp 0.8s 1.4s forwards, pulse 2s 2.4s infinite;
   }
   @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
@@ -772,6 +860,15 @@
     <span class="badge badge-green">Roguelike</span>
     <span class="badge badge-purple">Dark Sci-Fi</span>
     <span class="badge badge-orange">Pixel Art 16-Bit</span>
+  </div>
+
+  <!-- DOWNLOAD BUTTON -->
+  <div class="download-wrap">
+    <a class="download-btn" href="https://github.com/gweizz/aliens2y28/raw/refs/heads/main/releases/Aliens2Y28_Setup_0.1.0.exe" download>
+      <span class="download-icon">⬇</span>
+      <span>Download</span>
+    </a>
+    <div class="download-sub">// WINDOWS · VERSÃO 0.1.0 · ACESSO ANTECIPADO</div>
   </div>
 
   <div class="scroll-cta">↓ ACESSAR DOSSIER ↓</div>
