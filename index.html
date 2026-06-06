@@ -1,414 +1,336 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gef Studios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gef Studios | Forjando Universos</title>
+    <!-- Tailwind CSS para agilizar a estrutura e fontes imersivas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #9d4edd;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #0a0a0c;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Orbitron',sans-serif;
-}
+        .font-gaming {
+            font-family: 'Orbitron', sans-serif;
+        }
 
-body{
-background:#020617;
-color:white;
-overflow-x:hidden;
-cursor:none;
-}
+        /* Efeito de Brilho Neon */
+        .neon-text {
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+        }
 
-/* Cursor */
+        .neon-border:hover {
+            box-shadow: 0 0 15px var(--neon-purple), inset 0 0 15px var(--neon-purple);
+            border-color: var(--neon-purple);
+        }
 
-.cursor{
-position:fixed;
-width:20px;
-height:20px;
-border:2px solid #00ffff;
-border-radius:50%;
-pointer-events:none;
-transform:translate(-50%,-50%);
-z-index:9999;
-box-shadow:0 0 20px cyan;
-}
+        /* Animação de Scroll Customizada */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
 
-/* Background */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.bg{
-position:fixed;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at 20% 20%,rgba(0,255,255,.15),transparent 30%),
-radial-gradient(circle at 80% 40%,rgba(255,0,255,.15),transparent 30%),
-radial-gradient(circle at 50% 80%,rgba(0,100,255,.15),transparent 30%),
-#020617;
-animation:bgMove 15s infinite alternate;
-z-index:-2;
-}
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-purple);
+            border-radius: 4px;
+        }
 
-@keyframes bgMove{
-from{
-filter:hue-rotate(0deg);
-}
-to{
-filter:hue-rotate(90deg);
-}
-}
-
-/* Hero */
-
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-position:relative;
-}
-
-.logo{
-font-size:clamp(4rem,10vw,9rem);
-font-weight:900;
-text-transform:uppercase;
-position:relative;
-animation:glitch 3s infinite;
-}
-
-@keyframes glitch{
-0%,100%{
-text-shadow:
-0 0 20px cyan,
-0 0 40px cyan;
-}
-20%{
-transform:translateX(3px);
-}
-40%{
-transform:translateX(-3px);
-}
-60%{
-transform:translateY(2px);
-}
-80%{
-transform:translateY(-2px);
-}
-}
-
-.subtitle{
-margin-top:20px;
-font-size:1.3rem;
-opacity:.8;
-max-width:700px;
-}
-
-.cta{
-margin-top:40px;
-padding:18px 40px;
-border:none;
-border-radius:50px;
-background:linear-gradient(45deg,#00ffff,#7c3aed);
-color:white;
-font-size:1rem;
-cursor:pointer;
-transition:.4s;
-box-shadow:0 0 30px cyan;
-}
-
-.cta:hover{
-transform:scale(1.1);
-box-shadow:0 0 60px cyan;
-}
-
-/* Sections */
-
-section{
-padding:120px 10%;
-}
-
-.title{
-font-size:3rem;
-margin-bottom:50px;
-text-align:center;
-}
-
-/* Games */
-
-.games{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
-
-.card{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(15px);
-padding:30px;
-border-radius:25px;
-transition:.5s;
-transform-style:preserve-3d;
-border:1px solid rgba(255,255,255,.1);
-}
-
-.card:hover{
-transform:
-rotateX(10deg)
-rotateY(-10deg)
-translateY(-15px);
-box-shadow:0 20px 50px rgba(0,255,255,.3);
-}
-
-.card h3{
-margin-bottom:15px;
-color:#00ffff;
-}
-
-.card p{
-opacity:.8;
-line-height:1.6;
-}
-
-/* Stats */
-
-.stats{
-display:flex;
-justify-content:center;
-gap:80px;
-flex-wrap:wrap;
-}
-
-.stat{
-text-align:center;
-}
-
-.number{
-font-size:4rem;
-font-weight:900;
-color:#00ffff;
-}
-
-/* Footer */
-
-footer{
-padding:60px;
-text-align:center;
-opacity:.6;
-}
-
-/* Reveal */
-
-.hidden{
-opacity:0;
-transform:translateY(60px);
-transition:1s;
-}
-
-.show{
-opacity:1;
-transform:translateY(0);
-}
-
-/* Floating particles */
-
-.particle{
-position:fixed;
-border-radius:50%;
-background:white;
-opacity:.5;
-animation:float linear infinite;
-z-index:-1;
-}
-
-@keyframes float{
-from{
-transform:translateY(100vh);
-}
-to{
-transform:translateY(-100vh);
-}
-}
-</style>
+        /* Efeito de Scanner de Linha (Cyberpunk) */
+        .scanline::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 99;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body>
+<body class="scanline antialiased">
 
-<div class="bg"></div>
-<div class="cursor"></div>
+    <!-- Canvas de Fundo Interativo -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full -z-10 opacity-40"></canvas>
 
-<section class="hero">
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-opacity-70 bg-[#0a0a0c] backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-gaming text-2xl font-black tracking-widest text-white uppercase">
+                Gef<span class="text-[#00f3ff]">Studios</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 text-lg font-semibold tracking-wider uppercase">
+                <a href="#games" class="hover:text-[#00f3ff] transition-colors">Jogos</a>
+                <a href="#about" class="hover:text-[#00f3ff] transition-colors">O Estúdio</a>
+                <a href="#contact" class="hover:text-[#00f3ff] transition-colors">Contato</a>
+            </nav>
+        </div>
+    </header>
 
-<h1 class="logo">GEF STUDIOS</h1>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
+        <div class="z-10 max-w-4xl space-y-6">
+            <p class="font-gaming text-[#00f3ff] text-lg tracking-widest uppercase animate-pulse">
+                Bem-vindo ao Próximo Nível
+            </p>
+            <h1 class="font-gaming text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-none">
+                NÓS FORJAMOS <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00f3ff] to-[#9d4edd] neon-text">
+                    REALIDADES
+                </span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-2xl max-w-2xl mx-auto font-light">
+                Criando experiências digitais imersivas, mecânicas afiadas e universos que você não vai querer deixar.
+            </p>
+            <div class="pt-8">
+                <a href="#games" class="font-gaming px-8 py-4 bg-transparent border-2 border-[#00f3ff] text-[#00f3ff] font-bold uppercase tracking-widest rounded-none hover:bg-[#00f3ff] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.3)]">
+                    Explorar Jogos
+                </a>
+            </div>
+        </div>
 
-<p class="subtitle">
-Criando mundos extraordinários, experiências inesquecíveis
-e jogos que desafiam a imaginação.
-</p>
+        <!-- Indicador de Scroll -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
 
-<button class="cta">
-Explorar Universo
-</button>
+    <!-- Section: Jogos -->
+    <section id="games" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <h2 class="font-gaming text-4xl md:text-6xl font-bold text-white uppercase">
+                Nossas <span class="text-[#9d4edd]">Criações</span>
+            </h2>
+            <div class="w-24 h-1 bg-[#9d4edd] mx-auto mt-4"></div>
+        </div>
 
-</section>
+        <!-- Grid de Jogos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- Jogo 1 (Confidencial) -->
+            <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
+                <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
+                    <span class="font-gaming text-gray-600 text-2xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
+                </div>
+                <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
+                <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
+                <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
+            </div>
 
-<section class="hidden">
+            <!-- Jogo 2 (Delivery Sort - O Destaque) -->
+            <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d" style="perspective: 1000px;">
+                <div class="relative overflow-hidden h-64 bg-gray-900 flex items-center justify-center border border-gray-800 mb-6">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-[#00f3ff] to-transparent opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <span class="font-gaming text-gray-700 text-6xl font-bold group-hover:scale-110 transition-transform duration-500">LIVE</span>
+                </div>
+                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">Delivery Sort</h3>
+                <p class="text-gray-400 mb-4">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
+                <span class="inline-block text-xs font-gaming font-bold bg-[#00f3ff] text-black px-3 py-1 uppercase tracking-wider">Disponível</span>
+            </div>
 
-<h2 class="title">Nossos Jogos</h2>
+            <!-- Jogo 3 (Confidencial) -->
+            <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
+                <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
+                    <span class="font-gaming text-gray-600 text-2xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
+                </div>
+                <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
+                <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
+                <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
+            </div>
 
-<div class="games">
+        </div>
+    </section>
 
-<div class="card">
-<h3>Cyber Nexus</h3>
-<p>
-Uma aventura futurista em um universo dominado por IA.
-</p>
-</div>
+    <!-- Section: Sobre -->
+    <section id="about" class="py-32 bg-[#0d0d11] border-y border-gray-900 px-6">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="w-full md:w-1/2 space-y-6 reveal">
+                <h2 class="font-gaming text-4xl md:text-5xl font-bold text-white uppercase">
+                    Quem é a <br><span class="text-[#00f3ff] neon-text">Gef Studios?</span>
+                </h2>
+                <p class="text-gray-300 text-lg leading-relaxed">
+                    Nascemos da paixão por gameplay refinado e narrativas envolvendo. Não fazemos apenas jogos; criamos ecossistemas interativos onde a comunidade joga, compete e evolui junta. 
+                </p>
+                <p class="text-gray-400 text-md">
+                    Utilizando tecnologias modernas de desenvolvimento, transformamos linhas de código em diversão pura e experiências de tirar o fôlego.
+                </p>
+            </div>
+            <div class="w-full md:w-1/2 grid grid-cols-2 gap-4 reveal">
+                <div class="p-6 bg-[#121214] border border-gray-800 text-center">
+                    <span class="block font-gaming text-3xl font-black text-[#00f3ff]">Engine</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Desenvolvimento Ativo</span>
+                </div>
+                <div class="p-6 bg-[#121214] border border-gray-800 text-center">
+                    <span class="block font-gaming text-3xl font-black text-[#9d4edd]">Indie</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Espírito & Alma</span>
+                </div>
+                <div class="p-6 bg-[#121214] border border-gray-800 text-center">
+                    <span class="block font-gaming text-3xl font-black text-white">100%</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Foco na Comunidade</span>
+                </div>
+                <div class="p-6 bg-[#121214] border border-gray-800 text-center">
+                    <span class="block font-gaming text-3xl font-black text-[#00f3ff]">Altas</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">Taxas de Quadros</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="card">
-<h3>Forgotten Realms</h3>
-<p>
-Explore reinos perdidos e enfrente criaturas lendárias.
-</p>
-</div>
+    <!-- Section: Contato -->
+    <section id="contact" class="py-32 px-6 max-w-4xl mx-auto text-center reveal">
+        <h2 class="font-gaming text-4xl md:text-6xl font-bold text-white uppercase mb-6">
+            Vamos Construir algo <span class="text-[#00f3ff]">Juntos</span>
+        </h2>
+        <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto">
+            Tem um feedback sobre o Delivery Sort, proposta de parceria ou quer apenas trocar uma ideia? A porta está aberta.
+        </p>
+        
+        <div class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left">
+            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Mensagem enviada! (Simulação)');">
+                <div>
+                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu Nome</label>
+                    <input type="text" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
+                </div>
+                <div>
+                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu E-mail</label>
+                    <input type="email" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
+                </div>
+                <div>
+                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Mensagem</label>
+                    <textarea rows="4" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none"></textarea>
+                </div>
+                <button type="submit" class="w-full font-gaming bg-[#9d4edd] text-white py-3 font-bold uppercase tracking-widest hover:bg-opacity-80 transition-all duration-300">
+                    Transmitir Sinal
+                </button>
+            </form>
+        </div>
 
-<div class="card">
-<h3>Project Omega</h3>
-<p>
-A sobrevivência da humanidade depende de suas escolhas.
-</p>
-</div>
+        <footer class="mt-24 text-sm text-gray-600 font-gaming tracking-widest">
+            &copy; 2026 GEF STUDIOS. ALL RIGHTS RESERVED. POWERED BY CODE.
+        </footer>
+    </section>
 
-</div>
+    <!-- JavaScript para Animações Dinâmicas -->
+    <script>
+        // 1. Efeito de Fundo: Canvas com Partículas Conectadas Dinamicamente
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
 
-</section>
+        let particles = [];
+        const particleCount = 60;
 
-<section class="hidden">
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-<h2 class="title">Gef Studios em Números</h2>
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.speedY = (Math.random() - 0.5) * 0.6;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-<div class="stats">
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = '#00f3ff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
 
-<div class="stat">
-<div class="number" data-target="12">0</div>
-<p>Projetos</p>
-</div>
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
 
-<div class="stat">
-<div class="number" data-target="50000">0</div>
-<p>Jogadores</p>
-</div>
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
 
-<div class="stat">
-<div class="number" data-target="5">0</div>
-<p>Anos</p>
-</div>
+        // 2. Reveal Scroll Effect (Elementos aparecendo conforme desce a página)
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 120;
 
-</div>
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealElements);
+        revealElements();
 
-</section>
+        // 3. Efeito Interativo 3D nos Cards dos Jogos (Tilt Effect)
+        const cards = document.querySelectorAll('.card-3d');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                
+                const angleX = (yc - y) / 10;
+                const angleY = (x - xc) / 10;
+                
+                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+            });
 
-<footer>
-© 2025 Gef Studios — Criando o futuro dos games.
-</footer>
-
-<script>
-
-// Cursor
-
-const cursor = document.querySelector('.cursor');
-
-document.addEventListener('mousemove',e=>{
-cursor.style.left=e.clientX+'px';
-cursor.style.top=e.clientY+'px';
-});
-
-// Reveal Animation
-
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
-});
-});
-
-document.querySelectorAll('.hidden').forEach(el=>{
-observer.observe(el);
-});
-
-// Counter Animation
-
-const counters=document.querySelectorAll('.number');
-
-const counterObserver=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-const target=+entry.target.dataset.target;
-
-let count=0;
-
-const increment=target/100;
-
-const update=()=>{
-
-count+=increment;
-
-if(count<target){
-
-entry.target.innerText=Math.floor(count);
-requestAnimationFrame(update);
-
-}else{
-
-entry.target.innerText=
-target.toLocaleString();
-
-}
-
-};
-
-update();
-
-}
-
-});
-});
-
-counters.forEach(counter=>{
-counterObserver.observe(counter);
-});
-
-// Particles
-
-for(let i=0;i<100;i++){
-
-const particle=document.createElement('div');
-
-particle.classList.add('particle');
-
-const size=Math.random()*4+1;
-
-particle.style.width=size+'px';
-particle.style.height=size+'px';
-
-particle.style.left=Math.random()*100+'vw';
-
-particle.style.animationDuration=
-Math.random()*15+10+'s';
-
-particle.style.opacity=Math.random();
-
-document.body.appendChild(particle);
-
-}
-
-</script>
-
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
