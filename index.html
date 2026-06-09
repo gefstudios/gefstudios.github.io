@@ -406,8 +406,13 @@
                 setTimeout(() => {
                     modal.classList.remove('flex');
                     modal.classList.add('hidden');
-                }, 300); // Tempo batendo com a duration-300 do CSS
-                document.body.style.overflow = ''; // Libera o scroll
+                }, 300);
+                document.body.style.overflow = ''; 
+    
+                // LINHA ADICIONADA: Remove o #privacy da URL ao fechar o modal de forma limpa
+                if (window.location.hash === '#privacy') {
+                    history.replaceState(null, null, ' ');
+                }
             }
         }
 
