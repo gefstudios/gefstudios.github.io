@@ -148,7 +148,13 @@
                 </div>
                 <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">Delivery Sort</h3>
                 <p class="text-gray-400 mb-4">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
-                <span class="inline-block text-xs font-gaming font-bold bg-[#00f3ff] text-black px-3 py-1 uppercase tracking-wider">Disponível</span>
+                
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="inline-block text-xs font-gaming font-bold bg-[#00f3ff] text-black px-3 py-1 uppercase tracking-wider">Disponível</span>
+                    <a href="#privacyDeliverySort" onclick="toggleModal('delivery-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold border border-gray-700 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+                        Política de Privacidade
+                    </a>
+                </div>
             </div>
 
             <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
@@ -229,64 +235,63 @@
             <div>
                 &copy; 2026 GEF STUDIOS. ALL RIGHTS RESERVED. POWERED BY CODE.
             </div>
-            <button onclick="togglePrivacyModal(true)" class="text-xs text-gray-500 hover:text-[#00f3ff] border border-gray-800 px-4 py-2 bg-[#0d0d11] transition-all duration-300 uppercase tracking-widest">
-                Política de Privacidade
-            </button>
+            <a href="#privacy" onclick="toggleModal('general-modal', true); event.preventDefault();" class="text-xs text-gray-500 hover:text-[#00f3ff] border border-gray-800 px-4 py-2 bg-[#0d0d11] transition-all duration-300 uppercase tracking-widest">
+                Política de Privacidade Institucional
+            </a>
         </footer>
     </section>
 
-    <div id="privacy-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
-        <div class="bg-[#121214] border-2 border-[#00f3ff] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.2)]">
-            
+    <div id="general-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div class="bg-[#121214] border-2 border-gray-700 w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
                 <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
-                    POLÍTICA DE PRIVACIDADE <span class="text-[#00f3ff] block md:inline text-sm md:text-xl font-normal md:ml-2">[ JOGOS MOBILE ]</span>
+                    POLÍTICA INSTITUCIONAL <span class="text-gray-500 block md:inline text-sm md:text-xl font-normal md:ml-2">[ GEF STUDIOS ]</span>
                 </h3>
-                <button onclick="togglePrivacyModal(false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+                <button onclick="toggleModal('general-modal', false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
             </div>
+            <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-4 scrollbar-thin">
+                <p class="font-semibold text-gray-400">Última atualização: Junho de 2026</p>
+                <p>Esta política se aplica a todas as plataformas, websites e interações gerais controladas pela Gef Studios.</p>
+                <p>Nossos canais de comunicação e portfólios visam primariamente a divulgação de projetos de entretenimento digital. Informações coletadas através de formulários de contato voluntários são protegidas e não compartilhadas com terceiros sem consentimento explícito.</p>
+            </div>
+            <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
+                <button onclick="toggleModal('general-modal', false)" class="font-gaming border border-gray-600 text-gray-400 px-6 py-2 uppercase text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                    Fechar Terminal
+                </button>
+            </div>
+        </div>
+    </div>
 
+    <div id="delivery-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div class="bg-[#121214] border-2 border-[#00f3ff] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.2)]">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+                <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
+                    POLÍTICA DE PRIVACIDADE <span class="text-[#00f3ff] block md:inline text-sm md:text-xl font-normal md:ml-2">[ DELIVERY SORT ]</span>
+                </h3>
+                <button onclick="toggleModal('delivery-modal', false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+            </div>
             <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-6 scrollbar-thin">
                 <p class="font-semibold text-[#00f3ff]">Última atualização: Junho de 2026</p>
-                
-                <p>A <strong>Gef Studios</strong> valoriza a sua privacidade. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações ao jogar nossos jogos mobile de plataforma Android ou iOS (incluindo o <em>Delivery Sort</em>).</p>
-                
+                <p>A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas especificamente ao aplicativo mobile <strong>Delivery Sort</strong>.</p>
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta de Dados</h4>
-                    <p class="text-gray-400">Nossos jogos mobile podem coletar dados não identificáveis para melhoria de performance e jogabilidade, tais como:</p>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta e Uso de Informações</h4>
+                    <p class="text-gray-400">O jogo <em>Delivery Sort</em> foi projetado para focar puramente na experiência de jogabilidade. Armazenamos de forma estritamente local (no seu dispositivo) ou via serviços nativos da plataforma (Google Play Games / Apple Game Center):</p>
                     <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
-                        <li>Dados de desempenho do jogo, taxas de quadros e relatórios de falhas (Crashes).</li>
-                        <li>Identificadores de publicidade do dispositivo (IDFA/AAID) para veiculação de anúncios personalizados, caso aplicável.</li>
-                        <li>Pontuações máximas, progresso em fases e conquistas locais ou integradas via Game Center / Google Play Games.</li>
+                        <li>Pontuações máximas (Highscores) e progresso das fases de organização de entregas.</li>
+                        <li>Dados analíticos anônimos de telemetria para otimização de performance e ajustes de balanceamento dos puzzles.</li>
                     </ul>
                 </div>
-
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Uso de Serviços de Terceiros</h4>
-                    <p class="text-gray-400">Podemos utilizar ferramentas externas integradas para fins de análise e monetização:</p>
-                    <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
-                        <li><strong>Unity Analytics / Firebase:</strong> Para entender o comportamento dos usuários dentro das fases.</li>
-                        <li><strong>Redes de Anúncios (Ex: AdMob, Unity Ads):</strong> Que podem rastrear perfis de uso de forma anônima para exibir publicidade relevante.</li>
-                    </ul>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Monetização e Publicidade</h4>
+                    <p class="text-gray-400">Para viabilizar a distribuição gratuita, o aplicativo pode conter redes integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o IDFA ou AAID) para fins de conformidade e relevância de exibição.</p>
                 </div>
-
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">3. Retenção e Segurança dos Dados</h4>
-                    <p class="text-gray-400">Não armazenamos dados pessoais identificáveis (como nome, CPF ou localização precisa) em servidores próprios. Dados de progresso salvos na nuvem são gerenciados pelas respectivas lojas oficiais de aplicativos (Apple App Store e Google Play Store).</p>
-                </div>
-
-                <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">4. Consentimento Infantil</h4>
-                    <p class="text-gray-400">Nossos jogos são estruturados para conformidade total com as diretrizes do COPPA e LGPD. Não coletamos intencionalmente informações de crianças sem o devido consentimento dos responsáveis legais.</p>
-                </div>
-
-                <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">5. Alterações nesta Política</h4>
-                    <p class="text-gray-400">Reservamo-nos o direito de atualizar esta política de tempos em tempos. Recomendamos a revisão periódica desta página disponível em nosso site oficial.</p>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">3. Direitos e Contato</h4>
+                    <p class="text-gray-400">O usuário detém total controle sobre a limpeza de dados locais do aplicativo através das configurações padrão do sistema operacional do smartphone.</p>
                 </div>
             </div>
-
             <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
-                <button onclick="togglePrivacyModal(false)" class="font-gaming border border-[#00f3ff] text-[#00f3ff] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#00f3ff] hover:text-black transition-all duration-300">
+                <button onclick="toggleModal('delivery-modal', false)" class="font-gaming border border-[#00f3ff] text-[#00f3ff] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#00f3ff] hover:text-black transition-all duration-300">
                     Fechar Terminal
                 </button>
             </div>
@@ -294,10 +299,9 @@
     </div>
 
     <script>
-        // 1. Efeito de Fundo: Canvas com Partículas Conectadas Dinamicamente
+        // 1. Fundo Canvas com Partículas
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-
         let particles = [];
         const particleCount = 60;
 
@@ -319,7 +323,6 @@
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-
                 if (this.x > canvas.width) this.x = 0;
                 if (this.x < 0) this.x = canvas.width;
                 if (this.y > canvas.height) this.y = 0;
@@ -334,72 +337,57 @@
         }
 
         function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
         }
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animateParticles);
         }
         initParticles();
         animateParticles();
 
-        // 2. Reveal Scroll Effect (Elementos aparecendo conforme desce a página)
+        // 2. Reveal Scroll Effect
         function revealElements() {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(element => {
                 const windowHeight = window.innerHeight;
                 const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 120;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
-                }
+                if (elementTop < windowHeight - 120) element.classList.add('active');
             });
         }
         window.addEventListener('scroll', revealElements);
         revealElements();
 
-        // 3. Efeito Interativo 3D nos Cards dos Jogos (Tilt Effect)
+        // 3. Efeito Interativo 3D nos Cards (Tilt Effect)
         const cards = document.querySelectorAll('.card-3d');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
                 const xc = rect.width / 2;
                 const yc = rect.height / 2;
-                
                 const angleX = (yc - y) / 10;
                 const angleY = (x - xc) / 10;
-                
                 card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
             });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-            });
+            card.style.perspective = "1000px";
+            card.addEventListener('mouseleave', () => { card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'; });
         });
 
-        // 4. Controle de Abertura/Fechamento do Modal da Política de Privacidade
-        function togglePrivacyModal(show) {
-            const modal = document.getElementById('privacy-modal');
+        // 4. Nova Função de Controle Unificado para Modais e Atualização de Hash da URL
+        function toggleModal(modalId, show) {
+            const modal = document.getElementById(modalId);
             if (show) {
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
-                // Timeout para permitir que o navegador registre a transição de opacidade
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                     modal.classList.add('opacity-100');
                 }, 10);
-                document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+                document.body.style.overflow = 'hidden';
             } else {
                 modal.classList.remove('opacity-100');
                 modal.classList.add('opacity-0');
@@ -407,28 +395,32 @@
                     modal.classList.remove('flex');
                     modal.classList.add('hidden');
                 }, 300);
-                document.body.style.overflow = ''; 
-    
-                // LINHA ADICIONADA: Remove o #privacy da URL ao fechar o modal de forma limpa
-                if (window.location.hash === '#privacy') {
+                document.body.style.overflow = '';
+                
+                // Limpa a Hash da URL ao fechar qualquer modal para não bugar recarregamentos futuros
+                if (window.location.hash === '#privacy' || window.location.hash === '#privacyDeliverySort') {
                     history.replaceState(null, null, ' ');
                 }
             }
         }
 
-        // 5. Verifica se a URL contém '#privacy' para abrir o modal direto
-    function checkUrlHash() {
-        if (window.location.hash === '#privacy') {
-            togglePrivacyModal(true);
+        // 5. Roteamento Dinâmico por HASH (Suporta links diretos na URL)
+        function checkUrlHash() {
+            const currentHash = window.location.hash;
+            
+            // Fecha todos caso revalide
+            document.getElementById('general-modal').classList.add('hidden');
+            document.getElementById('delivery-modal').classList.add('hidden');
+            
+            if (currentHash === '#privacy') {
+                toggleModal('general-modal', true);
+            } else if (currentHash === '#privacyDeliverySort') {
+                toggleModal('delivery-modal', true);
+            }
         }
-    }
 
-    // Executa ao carregar a página
-    window.addEventListener('DOMContentLoaded', checkUrlHash);
-
-    // Executa caso o usuário mude a URL/clique em um link direto sem recarregar a página
-    window.addEventListener('hashchange', checkUrlHash);
-        
+        window.addEventListener('DOMContentLoaded', checkUrlHash);
+        window.addEventListener('hashchange', checkUrlHash);
     </script>
 </body>
 </html>
