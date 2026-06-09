@@ -153,6 +153,25 @@
 
         <div class="carousel-container flex overflow-x-auto gap-8 pb-8 pt-4 px-2 -mx-2 snap-x select-none cursor-grab active:cursor-grabbing">
             
+            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
+
+                <!-- Sem o retângulo, imagem direta -->
+                <div class="relative h-64 flex items-center justify-center mb-6">
+                    <img src="https://gefstudios.github.io/icone500.png" alt="Delivery Sort" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <span class="absolute top-0 right-0 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">LIVE</span>
+                </div>
+            
+                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">Delivery Sort</h3>
+                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
+
+                <div class="flex items-center justify-between">
+                    <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#00f3ff] text-[#00f3ff] px-3 py-1 uppercase tracking-wider">Disponível</span>
+                    <a href="#privacyDeliverySort" onclick="toggleModal('delivery-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+                        Privacidade
+                    </a>
+                </div>
+            </div>
+
             <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
                     <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
@@ -160,23 +179,6 @@
                 <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
                 <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
                 <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
-            </div>
-
-            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
-                <div class="relative overflow-hidden h-64 bg-[#0a0a0c] flex items-center justify-center border border-gray-800 mb-6">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent z-10 opacity-60"></div>
-                    <img src="https://gefstudios.github.io/icone500.png" alt="Delivery Sort" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
-                    <span class="absolute top-3 right-3 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">LIVE</span>
-                </div>
-                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">Delivery Sort</h3>
-                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
-                
-                <div class="flex items-center gap-2 flex-wrap">
-                    <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#00f3ff] text-[#00f3ff] px-3 py-1 uppercase tracking-wider">Disponível</span>
-                    <a href="#privacyDeliverySort" onclick="toggleModal('delivery-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
-                        Privacidade
-                    </a>
-                </div>
             </div>
 
             <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
@@ -233,24 +235,39 @@
             Tem um feedback sobre o Delivery Sort, proposta de parceria ou quer apenas trocar uma ideia? A porta está aberta.
         </p>
         
-        <div class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left mb-20">
-            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Mensagem enviada! (Simulação)');">
+        <div class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left mb-20 relative">
+
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                <input type="hidden" name="access_key" value="34b6fbaa-7040-4b11-83c9-c7d13c473d6d">
+            
                 <div>
                     <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu Nome</label>
-                    <input type="text" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
+                    <input type="text" name="name" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
                 </div>
                 <div>
                     <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu E-mail</label>
-                    <input type="email" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
+                    <input type="email" name="email" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
                 </div>
                 <div>
                     <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Mensagem</label>
-                    <textarea rows="4" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none"></textarea>
+                    <textarea rows="4" name="message" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none"></textarea>
                 </div>
-                <button type="submit" class="w-full font-gaming bg-[#9d4edd] text-white py-3 font-bold uppercase tracking-widest hover:bg-opacity-80 transition-all duration-300">
+                <button type="submit" id="submit-btn" class="w-full font-gaming bg-[#9d4edd] text-white py-3 font-bold uppercase tracking-widest hover:bg-opacity-80 transition-all duration-300">
                     Transmitir Sinal
                 </button>
             </form>
+        
+            <div id="success-message" class="hidden bg-[#121214] flex flex-col items-center justify-center p-12 md:p-16 text-center border border-[#00f3ff] shadow-[0_0_20px_rgba(0,243,255,0.15)] animate-fade-in w-full min-h-[380px]">
+                <div class="w-16 h-16 border-2 border-[#00f3ff] rounded-full flex items-center justify-center mb-6 shadow-[0_0_10px_var(--neon-cyan)]">
+                    <svg class="w-8 h-8 text-[#00f3ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="font-gaming text-2xl md:text-3xl font-bold text-white uppercase tracking-wider mb-4">Sinal Transmitido!</h3>
+                <p class="text-gray-400 font-light max-w-md text-sm md:text-base leading-relaxed">
+                    Sua mensagem foi criptografada e enviada com sucesso para a nossa base de dados.
+                </p>
+            </div>
         </div>
 
         <footer class="mt-12 text-sm text-gray-600 font-gaming tracking-widest flex flex-col items-center gap-4">
@@ -467,6 +484,59 @@
             const walk = (x - startX) * 1.5; // velocidade do arraste
             carousel.scrollLeft = scrollLeft - walk;
         });
+
+        // 6. Envio Assíncrono do Formulário de Contato
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede o redirecionamento padrão da página
+
+            // Altera o estado do botão para indicar processamento
+            submitBtn.disabled = true;
+            submitBtn.innerText = "TRANSMITINDO...";
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+        
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let res = await response.json();
+                if (response.status == 200) {
+                    // Sucesso: Esconde o formulário e mostra a tela de sucesso estilizada
+                    form.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('flex');
+                    form.reset(); // Limpa os campos
+                } else {
+                    // Caso ocorra algum erro na API
+                    console.log(res);
+                    alert("Falha na transmissão: " + res.message);
+                    resetButton();
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Erro de conexão ao transmitir o sinal.");
+                resetButton();
+            });
+        });
+
+        function resetButton() {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "TRANSMITIR SINAL";
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
     </script>
 </body>
 </html>
