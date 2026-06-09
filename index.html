@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gef Studios | Forjando Universos</title>
-    <!-- Tailwind CSS para agilizar a estrutura e fontes imersivas -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     
@@ -70,14 +69,18 @@
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
         }
+
+        /* Classes do Modal de Privacidade */
+        .modal-blur {
+            backdrop-filter: blur(15px);
+            background-color: rgba(10, 10, 12, 0.85);
+        }
     </style>
 </head>
 <body class="scanline antialiased">
 
-    <!-- Canvas de Fundo Interativo -->
     <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full -z-10 opacity-40"></canvas>
 
-    <!-- Header / Navbar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-opacity-70 bg-[#0a0a0c] backdrop-blur-md border-b border-gray-800 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="font-gaming text-2xl font-black tracking-widest text-white uppercase">
@@ -91,7 +94,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
         <div class="z-10 max-w-4xl space-y-6">
             <p class="font-gaming text-[#00f3ff] text-lg tracking-widest uppercase animate-pulse">
@@ -113,7 +115,6 @@
             </div>
         </div>
 
-        <!-- Indicador de Scroll -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
             <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -121,7 +122,6 @@
         </div>
     </section>
 
-    <!-- Section: Jogos -->
     <section id="games" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="text-center mb-20 reveal">
             <h2 class="font-gaming text-4xl md:text-6xl font-bold text-white uppercase">
@@ -130,10 +130,8 @@
             <div class="w-24 h-1 bg-[#9d4edd] mx-auto mt-4"></div>
         </div>
 
-        <!-- Grid de Jogos -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             
-            <!-- Jogo 1 (Confidencial) -->
             <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
                     <span class="font-gaming text-gray-600 text-2xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
@@ -143,7 +141,6 @@
                 <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
             </div>
 
-            <!-- Jogo 2 (Delivery Sort - O Destaque) -->
             <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d" style="perspective: 1000px;">
                 <div class="relative overflow-hidden h-64 bg-gray-900 flex items-center justify-center border border-gray-800 mb-6">
                     <div class="absolute inset-0 bg-gradient-to-tr from-[#00f3ff] to-transparent opacity-20 group-hover:opacity-40 transition-opacity"></div>
@@ -154,7 +151,6 @@
                 <span class="inline-block text-xs font-gaming font-bold bg-[#00f3ff] text-black px-3 py-1 uppercase tracking-wider">Disponível</span>
             </div>
 
-            <!-- Jogo 3 (Confidencial) -->
             <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
                     <span class="font-gaming text-gray-600 text-2xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
@@ -167,7 +163,6 @@
         </div>
     </section>
 
-    <!-- Section: Sobre -->
     <section id="about" class="py-32 bg-[#0d0d11] border-y border-gray-900 px-6">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="w-full md:w-1/2 space-y-6 reveal">
@@ -175,7 +170,7 @@
                     Quem é a <br><span class="text-[#00f3ff] neon-text">Gef Studios?</span>
                 </h2>
                 <p class="text-gray-300 text-lg leading-relaxed">
-                    Nascemos da paixão por gameplay refinado e narrativas envolvendo. Não fazemos apenas jogos; criamos ecossistemas interativos onde a comunidade joga, compete e evolui junta. 
+                    Nascemos da paixão por gameplay refinado e narrativas envolventes. Não fazemos apenas jogos; criamos ecossistemas interativos onde a comunidade joga, compete e evolui junta. 
                 </p>
                 <p class="text-gray-400 text-md">
                     Utilizando tecnologias modernas de desenvolvimento, transformamos linhas de código em diversão pura e experiências de tirar o fôlego.
@@ -202,7 +197,6 @@
         </div>
     </section>
 
-    <!-- Section: Contato -->
     <section id="contact" class="py-32 px-6 max-w-4xl mx-auto text-center reveal">
         <h2 class="font-gaming text-4xl md:text-6xl font-bold text-white uppercase mb-6">
             Vamos Construir algo <span class="text-[#00f3ff]">Juntos</span>
@@ -211,7 +205,7 @@
             Tem um feedback sobre o Delivery Sort, proposta de parceria ou quer apenas trocar uma ideia? A porta está aberta.
         </p>
         
-        <div class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left">
+        <div class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left mb-20">
             <form class="space-y-6" onsubmit="event.preventDefault(); alert('Mensagem enviada! (Simulação)');">
                 <div>
                     <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu Nome</label>
@@ -231,12 +225,74 @@
             </form>
         </div>
 
-        <footer class="mt-24 text-sm text-gray-600 font-gaming tracking-widest">
-            &copy; 2026 GEF STUDIOS. ALL RIGHTS RESERVED. POWERED BY CODE.
+        <footer class="mt-12 text-sm text-gray-600 font-gaming tracking-widest flex flex-col items-center gap-4">
+            <div>
+                &copy; 2026 GEF STUDIOS. ALL RIGHTS RESERVED. POWERED BY CODE.
+            </div>
+            <button onclick="togglePrivacyModal(true)" class="text-xs text-gray-500 hover:text-[#00f3ff] border border-gray-800 px-4 py-2 bg-[#0d0d11] transition-all duration-300 uppercase tracking-widest">
+                Política de Privacidade
+            </button>
         </footer>
     </section>
 
-    <!-- JavaScript para Animações Dinâmicas -->
+    <div id="privacy-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div class="bg-[#121214] border-2 border-[#00f3ff] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.2)]">
+            
+            <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+                <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
+                    POLÍTICA DE PRIVACIDADE <span class="text-[#00f3ff] block md:inline text-sm md:text-xl font-normal md:ml-2">[ JOGOS MOBILE ]</span>
+                </h3>
+                <button onclick="togglePrivacyModal(false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+            </div>
+
+            <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-6 scrollbar-thin">
+                <p class="font-semibold text-[#00f3ff]">Última atualização: Junho de 2026</p>
+                
+                <p>A <strong>Gef Studios</strong> valoriza a sua privacidade. Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações ao jogar nossos jogos mobile de plataforma Android ou iOS (incluindo o <em>Delivery Sort</em>).</p>
+                
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta de Dados</h4>
+                    <p class="text-gray-400">Nossos jogos mobile podem coletar dados não identificáveis para melhoria de performance e jogabilidade, tais como:</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                        <li>Dados de desempenho do jogo, taxas de quadros e relatórios de falhas (Crashes).</li>
+                        <li>Identificadores de publicidade do dispositivo (IDFA/AAID) para veiculação de anúncios personalizados, caso aplicável.</li>
+                        <li>Pontuações máximas, progresso em fases e conquistas locais ou integradas via Game Center / Google Play Games.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Uso de Serviços de Terceiros</h4>
+                    <p class="text-gray-400">Podemos utilizar ferramentas externas integradas para fins de análise e monetização:</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                        <li><strong>Unity Analytics / Firebase:</strong> Para entender o comportamento dos usuários dentro das fases.</li>
+                        <li><strong>Redes de Anúncios (Ex: AdMob, Unity Ads):</strong> Que podem rastrear perfis de uso de forma anônima para exibir publicidade relevante.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">3. Retenção e Segurança dos Dados</h4>
+                    <p class="text-gray-400">Não armazenamos dados pessoais identificáveis (como nome, CPF ou localização precisa) em servidores próprios. Dados de progresso salvos na nuvem são gerenciados pelas respectivas lojas oficiais de aplicativos (Apple App Store e Google Play Store).</p>
+                </div>
+
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">4. Consentimento Infantil</h4>
+                    <p class="text-gray-400">Nossos jogos são estruturados para conformidade total com as diretrizes do COPPA e LGPD. Não coletamos intencionalmente informações de crianças sem o devido consentimento dos responsáveis legais.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">5. Alterações nesta Política</h4>
+                    <p class="text-gray-400">Reservamo-nos o direito de atualizar esta política de tempos em tempos. Recomendamos a revisão periódica desta página disponível em nosso site oficial.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
+                <button onclick="togglePrivacyModal(false)" class="font-gaming border border-[#00f3ff] text-[#00f3ff] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#00f3ff] hover:text-black transition-all duration-300">
+                    Fechar Terminal
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 1. Efeito de Fundo: Canvas com Partículas Conectadas Dinamicamente
         const canvas = document.getElementById('bg-canvas');
@@ -331,6 +387,29 @@
                 card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
             });
         });
+
+        // 4. Controle de Abertura/Fechamento do Modal da Política de Privacidade
+        function togglePrivacyModal(show) {
+            const modal = document.getElementById('privacy-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                // Timeout para permitir que o navegador registre a transição de opacidade
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.classList.add('opacity-100');
+                }, 10);
+                document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+            } else {
+                modal.classList.remove('opacity-100');
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 300); // Tempo batendo com a duration-300 do CSS
+                document.body.style.overflow = ''; // Libera o scroll
+            }
+        }
     </script>
 </body>
 </html>
