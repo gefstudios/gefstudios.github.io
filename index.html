@@ -46,9 +46,10 @@
             transform: translateY(0);
         }
 
-        /* Custom Scrollbar */
+        /* Custom Scrollbar Geral */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #0a0a0c;
@@ -56,6 +57,14 @@
         ::-webkit-scrollbar-thumb {
             background: var(--neon-purple);
             border-radius: 4px;
+        }
+
+        /* Scrollbar específica e discreta para o Carrossel */
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 243, 255, 0.3);
+        }
+        .carousel-container::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-cyan);
         }
 
         /* Efeito de Scanner de Linha (Cyberpunk) */
@@ -74,6 +83,15 @@
         .modal-blur {
             backdrop-filter: blur(15px);
             background-color: rgba(10, 10, 12, 0.85);
+        }
+
+        /* Ajuste do comportamento de snapping do carrossel */
+        .carousel-container {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .carousel-item {
+            scroll-snap-align: start;
         }
     </style>
 </head>
@@ -122,44 +140,48 @@
         </div>
     </section>
 
-    <section id="games" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-20 reveal">
+    <section id="games" class="py-32 px-6 max-w-7xl mx-auto relative">
+        <div class="text-center mb-16 reveal">
             <h2 class="font-gaming text-4xl md:text-6xl font-bold text-white uppercase">
                 Nossas <span class="text-[#9d4edd]">Criações</span>
             </h2>
             <div class="w-24 h-1 bg-[#9d4edd] mx-auto mt-4"></div>
+            <p class="text-gray-500 text-sm font-gaming uppercase mt-4 tracking-widest animate-pulse md:hidden">
+                &larr; Deslize para os lados &rarr;
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="carousel-container flex overflow-x-auto gap-8 pb-8 pt-4 px-2 -mx-2 snap-x select-none cursor-grab active:cursor-grabbing">
             
-            <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
+            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
-                    <span class="font-gaming text-gray-600 text-2xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
+                    <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
                 </div>
                 <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
                 <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
                 <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
             </div>
 
-            <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d" style="perspective: 1000px;">
-                <div class="relative overflow-hidden h-64 bg-gray-900 flex items-center justify-center border border-gray-800 mb-6">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-[#00f3ff] to-transparent opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                    <span class="font-gaming text-gray-700 text-6xl font-bold group-hover:scale-110 transition-transform duration-500">LIVE</span>
+            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
+                <div class="relative overflow-hidden h-64 bg-[#0a0a0c] flex items-center justify-center border border-gray-800 mb-6">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] to-transparent z-10 opacity-60"></div>
+                    <img src="https://gefstudios.github.io/icone500.png" alt="Delivery Sort" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
+                    <span class="absolute top-3 right-3 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">LIVE</span>
                 </div>
                 <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">Delivery Sort</h3>
-                <p class="text-gray-400 mb-4">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
+                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
                 
                 <div class="flex items-center gap-2 flex-wrap">
-                    <span class="inline-block text-xs font-gaming font-bold bg-[#00f3ff] text-black px-3 py-1 uppercase tracking-wider">Disponível</span>
-                    <a href="#privacyDeliverySort" onclick="toggleModal('delivery-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold border border-gray-700 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
-                        Política de Privacidade
+                    <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#00f3ff] text-[#00f3ff] px-3 py-1 uppercase tracking-wider">Disponível</span>
+                    <a href="#privacyDeliverySort" onclick="toggleModal('delivery-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+                        Privacidade
                     </a>
                 </div>
             </div>
 
-            <div class="reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-40 hover:opacity-70 border-dashed">
+            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
-                    <span class="font-gaming text-gray-600 text-2xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
+                    <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
                 </div>
                 <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
                 <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
@@ -360,7 +382,7 @@
         window.addEventListener('scroll', revealElements);
         revealElements();
 
-        // 3. Efeito Interativo 3D nos Cards (Tilt Effect)
+        // 3. Efeito Interativo 3D nos Cards (Tilt Effect) modificado para funcionar com arrastar de carrossel
         const cards = document.querySelectorAll('.card-3d');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -369,15 +391,19 @@
                 const y = e.clientY - rect.top;
                 const xc = rect.width / 2;
                 const yc = rect.height / 2;
-                const angleX = (yc - y) / 10;
-                const angleY = (x - xc) / 10;
-                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+                const angleX = (yc - y) / 12;
+                const angleY = (x - xc) / 12;
+                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.01)`;
             });
             card.style.perspective = "1000px";
-            card.addEventListener('mouseleave', () => { card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'; });
+            card.style.transition = "transform 0.1s ease-out";
+            card.addEventListener('mouseleave', () => { 
+                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'; 
+                card.style.transition = "transform 0.5s ease";
+            });
         });
 
-        // 4. Nova Função de Controle Unificado para Modais e Atualização de Hash da URL
+        // 4. Controle Unificado para Modais e Atualização de Hash da URL
         function toggleModal(modalId, show) {
             const modal = document.getElementById(modalId);
             if (show) {
@@ -397,30 +423,50 @@
                 }, 300);
                 document.body.style.overflow = '';
                 
-                // Limpa a Hash da URL ao fechar qualquer modal para não bugar recarregamentos futuros
                 if (window.location.hash === '#privacy' || window.location.hash === '#privacyDeliverySort') {
                     history.replaceState(null, null, ' ');
                 }
             }
         }
 
-        // 5. Roteamento Dinâmico por HASH (Suporta links diretos na URL)
+        // 5. Roteamento Dinâmico por HASH
         function checkUrlHash() {
             const currentHash = window.location.hash;
-            
-            // Fecha todos caso revalide
-            document.getElementById('general-modal').classList.add('hidden');
-            document.getElementById('delivery-modal').classList.add('hidden');
-            
             if (currentHash === '#privacy') {
                 toggleModal('general-modal', true);
             } else if (currentHash === '#privacyDeliverySort') {
                 toggleModal('delivery-modal', true);
             }
         }
-
         window.addEventListener('DOMContentLoaded', checkUrlHash);
         window.addEventListener('hashchange', checkUrlHash);
+
+        // 6. Funcionalidade EXTRA: Arrastar com o mouse no PC para o Carrossel
+        const carousel = document.querySelector('.carousel-container');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+            carousel.style.scrollSnapType = 'none'; // desativa snap momentaneamente para arrastar liso
+        });
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            carousel.style.scrollSnapType = 'x mandatory'; // reativa o snap magnético
+        });
+        carousel.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 1.5; // velocidade do arraste
+            carousel.scrollLeft = scrollLeft - walk;
+        });
     </script>
 </body>
 </html>
