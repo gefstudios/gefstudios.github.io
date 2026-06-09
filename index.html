@@ -410,6 +410,20 @@
                 document.body.style.overflow = ''; // Libera o scroll
             }
         }
+
+        // 5. Verifica se a URL contém '#privacy' para abrir o modal direto
+    function checkUrlHash() {
+        if (window.location.hash === '#privacy') {
+            togglePrivacyModal(true);
+        }
+    }
+
+    // Executa ao carregar a página
+    window.addEventListener('DOMContentLoaded', checkUrlHash);
+
+    // Executa caso o usuário mude a URL/clique em um link direto sem recarregar a página
+    window.addEventListener('hashchange', checkUrlHash);
+        
     </script>
 </body>
 </html>
