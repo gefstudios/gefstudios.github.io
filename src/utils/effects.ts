@@ -1,22 +1,26 @@
-let revealInitialized = false;
+import {
+  initParallaxScroll,
+  initScrollProgress,
+  initScrollReveal,
+  playHeroIntro,
+  resetScrollExperience,
+} from './scrollExperience';
 
-function revealElements(): void {
-  document.querySelectorAll('.reveal').forEach((element) => {
-    const windowHeight = window.innerHeight;
-    const elementTop = element.getBoundingClientRect().top;
-    if (elementTop < windowHeight - 120) {
-      element.classList.add('active');
-    }
-  });
+export function initScrollExperience(): void {
+  initScrollReveal();
+  initScrollProgress();
+  initParallaxScroll();
+  playHeroIntro();
+}
+
+export function refreshScrollExperience(root: ParentNode = document): void {
+  resetScrollExperience(root);
+  playHeroIntro();
+  initParallaxScroll();
 }
 
 export function initRevealEffect(): void {
-  if (!revealInitialized) {
-    window.addEventListener('scroll', revealElements);
-    revealInitialized = true;
-  }
-
-  revealElements();
+  initScrollReveal();
 }
 
 export function initCardTiltEffect(): void {

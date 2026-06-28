@@ -1,8 +1,8 @@
 import type { Game } from '../data/games';
 
-export function GameCard(game: Game): string {
+export function GameCard(game: Game, index = 0): string {
   if (game.status === 'confidential' || game.status === 'briefing') {
-    return ConfidentialGameCard(game);
+    return ConfidentialGameCard(game, index);
   }
 
   const privacyLink = game.privacyPolicy
@@ -16,7 +16,7 @@ export function GameCard(game: Game): string {
     : '';
 
   return `
-    <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
+    <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] scroll-reveal scroll-reveal-up group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d" data-reveal-delay="${index * 130}">
       <a href="#/game/${game.id}" class="block">
         <div class="relative h-64 flex items-center justify-center mb-6">
           <img src="${game.icon}" alt="${game.title}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
@@ -33,9 +33,9 @@ export function GameCard(game: Game): string {
   `;
 }
 
-function ConfidentialGameCard(game: Game): string {
+function ConfidentialGameCard(game: Game, index: number): string {
   return `
-    <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
+    <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] scroll-reveal scroll-reveal-up group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed" data-reveal-delay="${index * 130}">
       <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
         <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
       </div>

@@ -1,8 +1,9 @@
 import { PrivacyModals } from '../components/PrivacyModals';
 import { getGameById } from '../data/games';
 import { initContactForm } from '../utils/contactForm';
+import { handleSectionHashNavigation, initSectionNavigation } from '../utils/sectionScroll';
 import { initStoreGateway } from '../utils/storeGateway';
-import { initCardTiltEffect, initCarouselDrag, initRevealEffect } from '../utils/effects';
+import { initCardTiltEffect, initCarouselDrag, initRevealEffect, refreshScrollExperience } from '../utils/effects';
 import { checkPrivacyHash } from '../utils/modals';
 import { GameDetailsView } from '../views/GameDetailsView';
 import { GameStoreView } from '../views/GameStoreView';
@@ -67,6 +68,7 @@ function renderRoute(): void {
   app.insertAdjacentHTML('beforeend', PrivacyModals());
   initPageEffects();
   checkPrivacyHash();
+  handleSectionHashNavigation();
 }
 
 function NotFoundView(): string {
@@ -87,9 +89,12 @@ function initPageEffects(): void {
   initCarouselDrag();
   initContactForm();
   initStoreGateway();
+  refreshScrollExperience();
 }
 
 export function initRouter(): void {
+  initSectionNavigation();
+
   document.addEventListener('click', (event) => {
     const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[data-scroll-top]');
     if (link) scrollToTop();
