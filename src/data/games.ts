@@ -6,6 +6,11 @@ export interface PrivacySection {
   list?: string[];
 }
 
+export interface StoreLinks {
+  googlePlay?: string;
+  appStore?: string;
+}
+
 export interface Game {
   id: string;
   title: string;
@@ -15,6 +20,7 @@ export interface Game {
   status: GameStatus;
   statusLabel: string;
   badge?: string;
+  storeLinks?: StoreLinks;
   privacyPolicy?: {
     title: string;
     subtitle: string;
@@ -34,11 +40,14 @@ export const games: Game[] = [
     shortDescription:
       'Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.',
     longDescription:
-      'Delivery Sort é um puzzle arcade onde cada segundo conta. Organize entregas, resolva desafios lógicos e domine mecânicas frenéticas em um universo operacional neon.',
+      'Delivery Sort é um puzzle arcade onde cada segundo conta. Organize entregas, resolva desafios lógicos e domine mecânicas frenéticas em um universo operacional neon. O jogo já está em produção e disponível para download na Google Play.',
     icon: '/assets/delivery-sort-icon.png',
     status: 'live',
     statusLabel: 'Disponível',
     badge: 'LIVE',
+    storeLinks: {
+      googlePlay: 'https://play.google.com/store/apps/details?id=com.deliverysort.game',
+    },
     features: [
       'Puzzles arcade com ritmo acelerado',
       'Progressão de fases com dificuldade crescente',
@@ -95,4 +104,12 @@ export const games: Game[] = [
 
 export function getGameById(id: string): Game | undefined {
   return games.find((game) => game.id === id);
+}
+
+export function getGameDownloadPath(id: string): string {
+  return `#/game/${id}/baixar`;
+}
+
+export function hasStoreLink(game: Game): boolean {
+  return Boolean(game.storeLinks?.googlePlay || game.storeLinks?.appStore);
 }

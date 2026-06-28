@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import type { Game } from '../data/games';
+import { getGameDownloadPath, hasStoreLink, type Game } from '../data/games';
 
 export function GameDetailsView(game: Game): string {
   const features = game.features
@@ -12,6 +12,22 @@ export function GameDetailsView(game: Game): string {
         </ul>
       </div>
     `
+    : '';
+
+  const storeButtons = hasStoreLink(game)
+    ? [
+        game.storeLinks?.googlePlay || game.storeLinks?.appStore
+          ? `<a href="${getGameDownloadPath(game.id)}" class="font-gaming bg-[#00f3ff] text-black px-6 py-3 uppercase text-sm tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)]">
+              Baixar Grátis
+            </a>`
+          : '',
+      ]
+        .filter(Boolean)
+        .join('')
+    : '';
+
+  const storeSection = storeButtons
+    ? `<div class="flex flex-wrap gap-4 pt-2">${storeButtons}</div>`
     : '';
 
   const privacyButton = game.privacyPolicy
@@ -51,6 +67,8 @@ export function GameDetailsView(game: Game): string {
           </p>
 
           ${features}
+
+          ${storeSection}
 
           <div class="flex flex-wrap gap-4 pt-4">
             ${privacyButton}

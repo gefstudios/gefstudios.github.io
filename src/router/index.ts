@@ -1,9 +1,10 @@
 import { PrivacyModals } from '../components/PrivacyModals';
 import { getGameById } from '../data/games';
-import { initContactForm } from '../utils/contactForm';
+import { initStoreGateway } from '../utils/storeGateway';
 import { initCardTiltEffect, initCarouselDrag, initRevealEffect } from '../utils/effects';
 import { checkPrivacyHash } from '../utils/modals';
 import { GameDetailsView } from '../views/GameDetailsView';
+import { GameStoreView } from '../views/GameStoreView';
 import { HomeView } from '../views/HomeView';
 
 type RouteHandler = () => string;
@@ -23,6 +24,10 @@ function parseRoute(): { path: string; params: Record<string, string>; isAnchorO
 
   const segments = hash.split('/').filter(Boolean);
 
+  if (segments[0] === 'game' && segments[1] && segments[2] === 'baixar') {
+    return { path: '/game/:id/baixar', params: { id: segments[1] }, isAnchorOnly: false };
+  }
+
   if (segments[0] === 'game' && segments[1]) {
     return { path: '/game/:id', params: { id: segments[1] }, isAnchorOnly: false };
   }
@@ -34,8 +39,8 @@ function parseRoute(): { path: string; params: Record<string, string>; isAnchorO
   return { path: '/', params: {}, isAnchorOnly: false };
 }
 
-function scrollToTop(): void {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function scrollToTop(instant = false): void {
+  window.scrollTo({ top: 0, behavior: instant ? 'instant' : 'smooth' });
 }
 
 function renderRoute(): void {
@@ -45,9 +50,15 @@ function renderRoute(): void {
   const { path, params, isAnchorOnly } = parseRoute();
   const isHomeMounted = app.querySelector('#games') !== null;
 
-  if (path === '/game/:id') {
+  if (path === '/game/:id/baixar') {
+    const game = getGameById(params.id);
+    const hasStore = game && (game.storeLinks?.googlePlay || game.storeLinks?.appStore);
+    app.innerHTML = hasStore ? GameStoreView(game!) : NotFoundView();
+    requestAnimationFrame(() => scrollToTop(true));
+  } else if (path === '/game/:id') {
     const game = getGameById(params.id);
     app.innerHTML = game ? GameDetailsView(game) : NotFoundView();
+    requestAnimationFrame(() => scrollToTop(true));
   } else if (!isAnchorOnly || !isHomeMounted) {
     app.innerHTML = routes['/']();
   }
@@ -74,6 +85,7 @@ function initPageEffects(): void {
   initCardTiltEffect();
   initCarouselDrag();
   initContactForm();
+  initStoreGateway();
 }
 
 export function initRouter(): void {
