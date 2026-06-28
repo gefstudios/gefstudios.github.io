@@ -1,5 +1,6 @@
 import { PrivacyModals } from '../components/PrivacyModals';
 import { getGameById } from '../data/games';
+import { initContactForm } from '../utils/contactForm';
 import { initStoreGateway } from '../utils/storeGateway';
 import { initCardTiltEffect, initCarouselDrag, initRevealEffect } from '../utils/effects';
 import { checkPrivacyHash } from '../utils/modals';
