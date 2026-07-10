@@ -1,4 +1,4 @@
-export type GameStatus = 'live' | 'briefing' | 'confidential';
+export type GameStatus = 'live' | 'briefing' | 'confidential' | 'production';
 
 export interface PrivacySection {
   title: string;
@@ -83,6 +83,15 @@ export const games: Game[] = [
         },
       ],
     },
+  },
+  {
+    id: 'botao-cup-2026',
+    title: 'Botão Cup 2026',
+    shortDescription:
+      'A febre da Copa de 2026 encontra a nostalgia do futebol de mesa. Escolha sua seleção favorita, defina suas táticas e deslize rumo à taça em partidas estratégicas e eletrizantes.',
+    icon: '/assets/BotaoCupIcon500.png',
+    status: 'production',
+    statusLabel: 'Em Desenvolvimento',
   },
   {
     id: 'next-universe-1',
