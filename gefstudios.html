@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gef Studios | Forjando Universos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --neon-cyan: #00f3ff;
@@ -33,9 +36,15 @@
             margin: 0 auto;
             animation: fl-size-breathe 7s ease-in-out infinite alternate;
         }
+
         @keyframes fl-size-breathe {
-            0%   { transform: scale(0.88); }
-            100% { transform: scale(1.06); }
+            0% {
+                transform: scale(0.88);
+            }
+
+            100% {
+                transform: scale(1.06);
+            }
         }
 
         .fl-nebula {
@@ -43,16 +52,23 @@
             inset: -15%;
             border-radius: 50%;
             background: radial-gradient(ellipse at 50% 50%,
-                rgba(0, 243, 255, 0.07) 0%,
-                rgba(0, 200, 255, 0.03) 50%,
-                transparent 75%
-            );
+                    rgba(0, 243, 255, 0.07) 0%,
+                    rgba(0, 200, 255, 0.03) 50%,
+                    transparent 75%);
             filter: blur(18px);
             animation: fl-nebula-pulse 5s ease-in-out infinite alternate;
         }
+
         @keyframes fl-nebula-pulse {
-            0%   { opacity: 0.5; transform: scale(0.95); }
-            100% { opacity: 1;   transform: scale(1.05); }
+            0% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
         }
 
         .fl-ring-main {
@@ -66,6 +82,7 @@
                 inset 0 0 30px 5px rgba(0, 220, 255, 0.04);
             animation: fl-ring-glow 4s ease-in-out infinite alternate;
         }
+
         @keyframes fl-ring-glow {
             0% {
                 box-shadow:
@@ -73,6 +90,7 @@
                     0 0 14px 4px rgba(0, 220, 255, 0.10),
                     0 0 40px 10px rgba(0, 200, 255, 0.05);
             }
+
             100% {
                 box-shadow:
                     0 0 0 2px rgba(0, 240, 255, 0.45),
@@ -89,9 +107,15 @@
             border: 1px solid rgba(0, 200, 255, 0.10);
             animation: fl-secondary-fade 4s ease-in-out infinite alternate 0.8s;
         }
+
         @keyframes fl-secondary-fade {
-            0%   { opacity: 0.3; }
-            100% { opacity: 0.8; }
+            0% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0.8;
+            }
         }
 
         /* Flares nos polos */
@@ -102,41 +126,57 @@
             width: 3px;
             pointer-events: none;
         }
-        .fl-flare-top    { top: -2px; }
-        .fl-flare-bottom { bottom: -2px; }
+
+        .fl-flare-top {
+            top: -2px;
+        }
+
+        .fl-flare-bottom {
+            bottom: -2px;
+        }
 
         .fl-flare::before {
             content: '';
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #fff;
             box-shadow:
-                0 0 6px 3px rgba(255,255,255,0.8),
-                0 0 18px 6px rgba(0,230,255,0.7),
-                0 0 40px 12px rgba(0,200,255,0.3);
+                0 0 6px 3px rgba(255, 255, 255, 0.8),
+                0 0 18px 6px rgba(0, 230, 255, 0.7),
+                0 0 40px 12px rgba(0, 200, 255, 0.3);
             animation: fl-flare-blink 4s ease-in-out infinite alternate;
         }
+
         .fl-flare::after {
             content: '';
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 1.5px; height: 40px;
+            width: 1.5px;
+            height: 40px;
             background: linear-gradient(to bottom,
-                transparent 0%,
-                rgba(0,230,255,0.5) 30%,
-                rgba(255,255,255,0.85) 50%,
-                rgba(0,230,255,0.5) 70%,
-                transparent 100%
-            );
+                    transparent 0%,
+                    rgba(0, 230, 255, 0.5) 30%,
+                    rgba(255, 255, 255, 0.85) 50%,
+                    rgba(0, 230, 255, 0.5) 70%,
+                    transparent 100%);
             animation: fl-flare-blink 4s ease-in-out infinite alternate;
         }
+
         @keyframes fl-flare-blink {
-            0%   { opacity: 0.4; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .fl-text {
@@ -150,44 +190,55 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             background: linear-gradient(to bottom,
-                #ffffff 0%,
-                #e0faff 30%,
-                #00e8ff 70%,
-                #00b8d4 100%
-            );
+                    #ffffff 0%,
+                    #e0faff 30%,
+                    #00e8ff 70%,
+                    #00b8d4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             filter:
-                drop-shadow(0 0 8px rgba(0,230,255,0.6))
-                drop-shadow(0 0 24px rgba(0,200,255,0.3));
+                drop-shadow(0 0 8px rgba(0, 230, 255, 0.6)) drop-shadow(0 0 24px rgba(0, 200, 255, 0.3));
             animation: fl-text-glow 4s ease-in-out infinite alternate;
             user-select: none;
         }
+
         @keyframes fl-text-glow {
             0% {
                 filter:
-                    drop-shadow(0 0 5px rgba(0,230,255,0.4))
-                    drop-shadow(0 0 16px rgba(0,200,255,0.18));
+                    drop-shadow(0 0 5px rgba(0, 230, 255, 0.4)) drop-shadow(0 0 16px rgba(0, 200, 255, 0.18));
             }
+
             100% {
                 filter:
-                    drop-shadow(0 0 14px rgba(0,240,255,0.85))
-                    drop-shadow(0 0 36px rgba(0,210,255,0.45));
+                    drop-shadow(0 0 14px rgba(0, 240, 255, 0.85)) drop-shadow(0 0 36px rgba(0, 210, 255, 0.45));
             }
         }
 
         /* Estrelinhas ao redor */
-        .fl-stars { position: absolute; inset: -20%; pointer-events: none; }
+        .fl-stars {
+            position: absolute;
+            inset: -20%;
+            pointer-events: none;
+        }
+
         .fl-star {
             position: absolute;
             border-radius: 50%;
             background: #fff;
-            animation: fl-twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);
+            animation: fl-twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s);
         }
+
         @keyframes fl-twinkle {
-            0%, 100% { opacity: 0.1; }
-            50%       { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 0.1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         /* Efeito de Brilho Neon */
@@ -217,9 +268,11 @@
             width: 8px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #0a0a0c;
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--neon-purple);
             border-radius: 4px;
@@ -229,6 +282,7 @@
         .carousel-container::-webkit-scrollbar-thumb {
             background: rgba(0, 243, 255, 0.3);
         }
+
         .carousel-container::-webkit-scrollbar-thumb:hover {
             background: var(--neon-cyan);
         }
@@ -238,7 +292,10 @@
             content: " ";
             display: block;
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 99;
             background-size: 100% 2px, 3px 100%;
@@ -256,17 +313,20 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
+
         .carousel-item {
             scroll-snap-align: start;
         }
     </style>
 </head>
+
 <body class="scanline antialiased">
 
     <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full -z-10 opacity-40"></canvas>
 
 
-    <header class="fixed top-0 left-0 w-full z-50 bg-opacity-70 bg-[#0a0a0c] backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-opacity-70 bg-[#0a0a0c] backdrop-blur-md border-b border-gray-800 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="font-gaming text-2xl font-black tracking-widest text-white uppercase">
                 Gef<span class="text-[#00f3ff]">Studios</span>
@@ -279,87 +339,94 @@
         </div>
     </header>
 
-<section class="relative min-h-screen flex flex-col justify-center items-center px-4 pt-20 pb-10">
-    
-    <div class="z-10 max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-6">
-        
-        <div class="flex justify-center items-center w-full md:w-1/2"; opacity: 0.75;">
-            <div id="floating-logo" 
-                 style="
+    <section class="relative min-h-screen flex flex-col justify-center items-center px-4 pt-20 pb-10">
+
+        <div class="z-10 max-w-6xl w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-6">
+
+            <div class="flex justify-center items-center w-full md:w-1/2" ; opacity: 0.75;">
+                <div id="floating-logo" style="
                     width: 360px; /* Bem maior, como na foto */
                     height: 360px; 
                     position: relative; 
                     pointer-events: none; 
                     animation: fl-size-breathe 7s ease-in-out infinite alternate; 
                     flex-shrink: 0;
-                 "
-            >
-                <div class="fl-nebula"></div>
-                <div class="fl-ring-secondary"></div>
-                <div class="fl-ring-main"></div>
-                <div class="fl-flare fl-flare-top"></div>
-                <div class="fl-flare fl-flare-bottom"></div>
-                <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;">
-                    <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="url(#fl-vg)" stroke-width="1" opacity="0.3"/>
-                    <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="url(#fl-hg)" stroke-width="0.7" opacity="0.2"/>
-                    <defs>
-                        <linearGradient id="fl-vg" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%"   stop-color="#00e8ff" stop-opacity="0"/>
-                            <stop offset="40%"  stop-color="#00e8ff" stop-opacity="0.7"/>
-                            <stop offset="50%"  stop-color="#ffffff" stop-opacity="1"/>
-                            <stop offset="60%"  stop-color="#00e8ff" stop-opacity="0.7"/>
-                            <stop offset="100%" stop-color="#00e8ff" stop-opacity="0"/>
-                        </linearGradient>
-                        <linearGradient id="fl-hg" x1="0" y1="0" x2="1" y2="0">
-                            <stop offset="0%"   stop-color="#00e8ff" stop-opacity="0"/>
-                            <stop offset="40%"  stop-color="#00e8ff" stop-opacity="0.6"/>
-                            <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.9"/>
-                            <stop offset="60%"  stop-color="#00e8ff" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="#00e8ff" stop-opacity="0"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="fl-stars">
-                    <div class="fl-star" style="width:2px;height:2px;top:8%;left:15%;--d:2.8s;--delay:0s;"></div>
-                    <div class="fl-star" style="width:1.5px;height:1.5px;top:12%;left:76%;--d:3.5s;--delay:0.6s;"></div>
-                    <div class="fl-star" style="width:2px;height:2px;top:80%;left:80%;--d:2.3s;--delay:1.1s;"></div>
-                    <div class="fl-star" style="width:1.5px;height:1.5px;top:82%;left:12%;--d:4.1s;--delay:0.3s;"></div>
-                    <div class="fl-star" style="width:1px;height:1px;top:50%;left:95%;--d:3.2s;--delay:1.8s;"></div>
-                    <div class="fl-star" style="width:1px;height:1px;top:20%;left:3%;--d:2.6s;--delay:2.2s;"></div>
-                    <div class="fl-star" style="width:2px;height:2px;top:90%;left:50%;--d:3.7s;--delay:0.9s;"></div>
+                 ">
+                    <div class="fl-nebula"></div>
+                    <div class="fl-ring-secondary"></div>
+                    <div class="fl-ring-main"></div>
+                    <div class="fl-flare fl-flare-top"></div>
+                    <div class="fl-flare fl-flare-bottom"></div>
+                    <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;">
+                        <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="url(#fl-vg)" stroke-width="1" opacity="0.3" />
+                        <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="url(#fl-hg)" stroke-width="0.7"
+                            opacity="0.2" />
+                        <defs>
+                            <linearGradient id="fl-vg" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#00e8ff" stop-opacity="0" />
+                                <stop offset="40%" stop-color="#00e8ff" stop-opacity="0.7" />
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
+                                <stop offset="60%" stop-color="#00e8ff" stop-opacity="0.7" />
+                                <stop offset="100%" stop-color="#00e8ff" stop-opacity="0" />
+                            </linearGradient>
+                            <linearGradient id="fl-hg" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#00e8ff" stop-opacity="0" />
+                                <stop offset="40%" stop-color="#00e8ff" stop-opacity="0.6" />
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.9" />
+                                <stop offset="60%" stop-color="#00e8ff" stop-opacity="0.6" />
+                                <stop offset="100%" stop-color="#00e8ff" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="fl-stars">
+                        <div class="fl-star" style="width:2px;height:2px;top:8%;left:15%;--d:2.8s;--delay:0s;"></div>
+                        <div class="fl-star" style="width:1.5px;height:1.5px;top:12%;left:76%;--d:3.5s;--delay:0.6s;">
+                        </div>
+                        <div class="fl-star" style="width:2px;height:2px;top:80%;left:80%;--d:2.3s;--delay:1.1s;"></div>
+                        <div class="fl-star" style="width:1.5px;height:1.5px;top:82%;left:12%;--d:4.1s;--delay:0.3s;">
+                        </div>
+                        <div class="fl-star" style="width:1px;height:1px;top:50%;left:95%;--d:3.2s;--delay:1.8s;"></div>
+                        <div class="fl-star" style="width:1px;height:1px;top:20%;left:3%;--d:2.6s;--delay:2.2s;"></div>
+                        <div class="fl-star" style="width:2px;height:2px;top:90%;left:50%;--d:3.7s;--delay:0.9s;"></div>
+                    </div>
+                    <div class="fl-text"
+                        style="font-size:96px; line-height:360px; display:flex; justify-content:center; align-items:center; height:100%;">
+                        GEF</div>
                 </div>
-                <div class="fl-text" style="font-size:96px; line-height:360px; display:flex; justify-content:center; align-items:center; height:100%;">GEF</div>
             </div>
+
+            <div class="w-full md:w-1/2 space-y-6 text-center md:text-left flex flex-col items-center md:items-start">
+                <p class="font-gaming text-[#00f3ff] text-base md:text-lg tracking-widest uppercase animate-pulse">
+                    Bem-vindo ao Próximo Nível
+                </p>
+                <h1
+                    class="font-gaming text-4xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
+                    NÓS FORJAMOS <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00f3ff] to-[#9d4edd] neon-text">
+                        REALIDADES
+                    </span>
+                </h1>
+                <p class="text-gray-400 text-base md:text-xl max-w-xl font-light">
+                    Criando experiências digitais imersivas, mecânicas afiadas e universos que você não vai querer
+                    deixar.
+                </p>
+                <div class="pt-4">
+                    <a href="#games"
+                        class="font-gaming px-8 py-4 bg-transparent border-2 border-[#00f3ff] text-[#00f3ff] font-bold uppercase tracking-widest rounded-none hover:bg-[#00f3ff] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.3)]">
+                        Explorar Jogos
+                    </a>
+                </div>
+            </div>
+
         </div>
 
-        <div class="w-full md:w-1/2 space-y-6 text-center md:text-left flex flex-col items-center md:items-start">
-            <p class="font-gaming text-[#00f3ff] text-base md:text-lg tracking-widest uppercase animate-pulse">
-                Bem-vindo ao Próximo Nível
-            </p>
-            <h1 class="font-gaming text-4xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
-                NÓS FORJAMOS <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00f3ff] to-[#9d4edd] neon-text">
-                    REALIDADES
-                </span>
-            </h1>
-            <p class="text-gray-400 text-base md:text-xl max-w-xl font-light">
-                Criando experiências digitais imersivas, mecânicas afiadas e universos que você não vai querer deixar.
-            </p>
-            <div class="pt-4">
-                <a href="#games" class="font-gaming px-8 py-4 bg-transparent border-2 border-[#00f3ff] text-[#00f3ff] font-bold uppercase tracking-widest rounded-none hover:bg-[#00f3ff] hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.3)]">
-                    Explorar Jogos
-                </a>
-            </div>
+        <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
+            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
         </div>
-
-    </div>
-
-    <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-    </div>
-</section>
+    </section>
 
     <section id="games" class="py-32 px-6 max-w-7xl mx-auto relative">
         <div class="text-center mb-16 reveal">
@@ -372,60 +439,87 @@
             </p>
         </div>
 
-        <div class="carousel-container flex overflow-x-auto gap-8 pb-8 pt-4 px-2 -mx-2 snap-x select-none cursor-grab active:cursor-grabbing">
-            
-            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
+        <div
+            class="carousel-container flex overflow-x-auto gap-8 pb-8 pt-4 px-2 -mx-2 snap-x select-none cursor-grab active:cursor-grabbing">
+
+            <div
+                class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
 
                 <!-- Sem o retângulo, imagem direta -->
                 <div class="relative h-64 flex items-center justify-center mb-6">
-                    <img src="https://gefstudios.github.io/icone500.png" alt="Delivery Sort" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
-                    <span class="absolute top-0 right-0 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">LIVE</span>
+                    <img src="https://gefstudios.github.io/icone500.png" alt="Delivery Sort"
+                        class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <span
+                        class="absolute top-0 right-0 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">LIVE</span>
                 </div>
-            
-                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">Delivery Sort</h3>
-                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">Um puzzle arcade frenético e estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.</p>
+
+                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#00f3ff] transition-colors">
+                    Delivery Sort</h3>
+                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">Um puzzle arcade frenético e
+                    estratégico onde organização rápida e raciocínio lógico são as chaves para o sucesso operacional.
+                </p>
 
                 <div class="flex items-center justify-between">
-                    <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#00f3ff] text-[#00f3ff] px-3 py-1 uppercase tracking-wider">Disponível</span>
-                    <a href="#privacyDeliverySort" onclick="toggleModal('delivery-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+                    <span
+                        class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#00f3ff] text-[#00f3ff] px-3 py-1 uppercase tracking-wider">Disponível</span>
+                    <a href="#privacyDeliverySort"
+                        onclick="toggleModal('delivery-modal', true); event.preventDefault();"
+                        class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#00f3ff] hover:border-[#00f3ff] px-3 py-1 uppercase tracking-wider transition-all duration-300">
                         Privacidade
                     </a>
                 </div>
             </div>
 
-            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
+            <div
+                class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d">
                 <div class="relative h-64 flex items-center justify-center mb-6">
-                    <img src="/assets/BotaoCupIcon500.png" alt="Botão Cup 2026" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
-                    <span class="absolute top-0 right-0 font-gaming text-xs bg-[#9d4edd] text-white font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-purple)]">EM PRODUÇÃO</span>
+                    <img src="/assets/BotaoCupIcon500.png" alt="Botão Cup 2026"
+                        class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <span
+                        class="absolute top-0 right-0 font-gaming text-xs bg-[#9d4edd] text-white font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-purple)]">TEST</span>
                 </div>
-            
-                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#9d4edd] transition-colors">Botão Cup 2026</h3>
-                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">A febre da Copa de 2026 encontra a nostalgia do futebol de mesa. Escolha sua seleção favorita, defina suas táticas e deslize rumo à taça em partidas estratégicas e eletrizantes.</p>
+
+                <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#9d4edd] transition-colors">
+                    Botão Cup 2026</h3>
+                <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">A febre da Copa de 2026 encontra a
+                    nostalgia do futebol de mesa. Escolha sua seleção favorita, defina suas táticas e deslize rumo à
+                    taça em partidas estratégicas e eletrizantes.</p>
 
                 <div class="flex items-center justify-between">
-                    <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#9d4edd] text-[#9d4edd] px-3 py-1 uppercase tracking-wider">Em Desenvolvimento</span>
-                    <a href="#privacyBotaoCup" onclick="toggleModal('botao-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#9d4edd] hover:border-[#9d4edd] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+                    <span
+                        class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#9d4edd] text-[#9d4edd] px-3 py-1 uppercase tracking-wider">Em
+                        Desenvolvimento</span>
+                    <a href="#privacyBotaoCup" onclick="toggleModal('botao-modal', true); event.preventDefault();"
+                        class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#9d4edd] hover:border-[#9d4edd] px-3 py-1 uppercase tracking-wider transition-all duration-300">
                         Privacidade
                     </a>
                 </div>
             </div>
 
-            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
+            <div
+                class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
                     <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
                 </div>
                 <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
-                <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
-                <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
+                <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades
+                    virtuais.</p>
+                <span
+                    class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase
+                    de Briefing</span>
             </div>
 
-            <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
+            <div
+                class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] reveal group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 opacity-30 hover:opacity-50 border-dashed">
                 <div class="h-64 border-2 border-dashed border-gray-800 flex flex-col items-center justify-center mb-6">
                     <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
                 </div>
                 <h3 class="font-gaming text-2xl font-bold text-gray-500 mb-2">Próximo Universo</h3>
-                <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.</p>
-                <span class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase de Briefing</span>
+                <p class="text-gray-600 mb-4">Novas ideias já estão sendo prototipadas na nossa incubadora de realidades
+                    virtuais.</p>
+                <span
+                    class="inline-block text-xs font-gaming font-bold bg-gray-800 text-gray-500 px-3 py-1 uppercase tracking-wider">Fase
+                    de Briefing</span>
             </div>
 
         </div>
@@ -438,10 +532,12 @@
                     Quem é a <br><span class="text-[#00f3ff] neon-text">Gef Studios?</span>
                 </h2>
                 <p class="text-gray-300 text-lg leading-relaxed">
-                    Nascemos da paixão por gameplay refinado e narrativas envolventes. Não fazemos apenas jogos; criamos ecossistemas interativos onde a comunidade joga, compete e evolui junta. 
+                    Nascemos da paixão por gameplay refinado e narrativas envolventes. Não fazemos apenas jogos; criamos
+                    ecossistemas interativos onde a comunidade joga, compete e evolui junta.
                 </p>
                 <p class="text-gray-400 text-md">
-                    Utilizando tecnologias modernas de desenvolvimento, transformamos linhas de código em diversão pura e experiências de tirar o fôlego.
+                    Utilizando tecnologias modernas de desenvolvimento, transformamos linhas de código em diversão pura
+                    e experiências de tirar o fôlego.
                 </p>
             </div>
             <div class="w-full md:w-1/2 grid grid-cols-2 gap-4 reveal">
@@ -470,38 +566,50 @@
             Vamos Construir algo <span class="text-[#00f3ff]">Juntos</span>
         </h2>
         <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto">
-            Tem um feedback sobre o Delivery Sort, proposta de parceria ou quer apenas trocar uma ideia? A porta está aberta.
+            Tem um feedback sobre o Delivery Sort, proposta de parceria ou quer apenas trocar uma ideia? A porta está
+            aberta.
         </p>
-        
-        <div class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left mb-20 relative">
+
+        <div
+            class="inline-block border border-gray-800 bg-[#121214] p-8 md:p-12 w-full max-w-xl text-left mb-20 relative">
 
             <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
                 <input type="hidden" name="access_key" value="34b6fbaa-7040-4b11-83c9-c7d13c473d6d">
-            
+
                 <div>
-                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu Nome</label>
-                    <input type="text" name="name" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
+                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu
+                        Nome</label>
+                    <input type="text" name="name" required
+                        class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
                 </div>
                 <div>
-                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu E-mail</label>
-                    <input type="email" name="email" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
+                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Seu
+                        E-mail</label>
+                    <input type="email" name="email" required
+                        class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none">
                 </div>
                 <div>
-                    <label class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Mensagem</label>
-                    <textarea rows="4" name="message" required class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none"></textarea>
+                    <label
+                        class="block font-gaming text-xs uppercase tracking-wider text-gray-400 mb-2">Mensagem</label>
+                    <textarea rows="4" name="message" required
+                        class="w-full bg-[#0a0a0c] border border-gray-800 p-3 text-white focus:outline-none focus:border-[#00f3ff] transition-colors rounded-none"></textarea>
                 </div>
-                <button type="submit" id="submit-btn" class="w-full font-gaming bg-[#9d4edd] text-white py-3 font-bold uppercase tracking-widest hover:bg-opacity-80 transition-all duration-300">
+                <button type="submit" id="submit-btn"
+                    class="w-full font-gaming bg-[#9d4edd] text-white py-3 font-bold uppercase tracking-widest hover:bg-opacity-80 transition-all duration-300">
                     Transmitir Sinal
                 </button>
             </form>
-        
-            <div id="success-message" class="hidden bg-[#121214] flex flex-col items-center justify-center p-12 md:p-16 text-center border border-[#00f3ff] shadow-[0_0_20px_rgba(0,243,255,0.15)] animate-fade-in w-full min-h-[380px]">
-                <div class="w-16 h-16 border-2 border-[#00f3ff] rounded-full flex items-center justify-center mb-6 shadow-[0_0_10px_var(--neon-cyan)]">
+
+            <div id="success-message"
+                class="hidden bg-[#121214] flex flex-col items-center justify-center p-12 md:p-16 text-center border border-[#00f3ff] shadow-[0_0_20px_rgba(0,243,255,0.15)] animate-fade-in w-full min-h-[380px]">
+                <div
+                    class="w-16 h-16 border-2 border-[#00f3ff] rounded-full flex items-center justify-center mb-6 shadow-[0_0_10px_var(--neon-cyan)]">
                     <svg class="w-8 h-8 text-[#00f3ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                 </div>
-                <h3 class="font-gaming text-2xl md:text-3xl font-bold text-white uppercase tracking-wider mb-4">Sinal Transmitido!</h3>
+                <h3 class="font-gaming text-2xl md:text-3xl font-bold text-white uppercase tracking-wider mb-4">Sinal
+                    Transmitido!</h3>
                 <p class="text-gray-400 font-light max-w-md text-sm md:text-base leading-relaxed">
                     Sua mensagem foi criptografada e enviada com sucesso para a nossa base de dados.
                 </p>
@@ -512,99 +620,139 @@
             <div>
                 &copy; 2026 GEF STUDIOS. ALL RIGHTS RESERVED. POWERED BY CODE.
             </div>
-            <a href="#privacy" onclick="toggleModal('general-modal', true); event.preventDefault();" class="text-xs text-gray-500 hover:text-[#00f3ff] border border-gray-800 px-4 py-2 bg-[#0d0d11] transition-all duration-300 uppercase tracking-widest">
+            <a href="#privacy" onclick="toggleModal('general-modal', true); event.preventDefault();"
+                class="text-xs text-gray-500 hover:text-[#00f3ff] border border-gray-800 px-4 py-2 bg-[#0d0d11] transition-all duration-300 uppercase tracking-widest">
                 Política de Privacidade Institucional
             </a>
         </footer>
     </section>
 
-    <div id="general-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
-        <div class="bg-[#121214] border-2 border-gray-700 w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+    <div id="general-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div
+            class="bg-[#121214] border-2 border-gray-700 w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
                 <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
-                    POLÍTICA INSTITUCIONAL <span class="text-gray-500 block md:inline text-sm md:text-xl font-normal md:ml-2">[ GEF STUDIOS ]</span>
+                    POLÍTICA INSTITUCIONAL <span
+                        class="text-gray-500 block md:inline text-sm md:text-xl font-normal md:ml-2">[ GEF STUDIOS
+                        ]</span>
                 </h3>
-                <button onclick="toggleModal('general-modal', false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+                <button onclick="toggleModal('general-modal', false)"
+                    class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
             </div>
             <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-4 scrollbar-thin">
                 <p class="font-semibold text-gray-400">Última atualização: Junho de 2026</p>
-                <p>Esta política se aplica a todas as plataformas, websites e interações gerais controladas pela Gef Studios.</p>
-                <p>Nossos canais de comunicação e portfólios visam primariamente a divulgação de projetos de entretenimento digital. Informações coletadas através de formulários de contato voluntários são protegidas e não compartilhadas com terceiros sem consentimento explícito.</p>
+                <p>Esta política se aplica a todas as plataformas, websites e interações gerais controladas pela Gef
+                    Studios.</p>
+                <p>Nossos canais de comunicação e portfólios visam primariamente a divulgação de projetos de
+                    entretenimento digital. Informações coletadas através de formulários de contato voluntários são
+                    protegidas e não compartilhadas com terceiros sem consentimento explícito.</p>
             </div>
             <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
-                <button onclick="toggleModal('general-modal', false)" class="font-gaming border border-gray-600 text-gray-400 px-6 py-2 uppercase text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                <button onclick="toggleModal('general-modal', false)"
+                    class="font-gaming border border-gray-600 text-gray-400 px-6 py-2 uppercase text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300">
                     Fechar Terminal
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="delivery-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
-        <div class="bg-[#121214] border-2 border-[#00f3ff] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.2)]">
+    <div id="delivery-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div
+            class="bg-[#121214] border-2 border-[#00f3ff] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.2)]">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
                 <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
-                    POLÍTICA DE PRIVACIDADE <span class="text-[#00f3ff] block md:inline text-sm md:text-xl font-normal md:ml-2">[ DELIVERY SORT ]</span>
+                    POLÍTICA DE PRIVACIDADE <span
+                        class="text-[#00f3ff] block md:inline text-sm md:text-xl font-normal md:ml-2">[ DELIVERY SORT
+                        ]</span>
                 </h3>
-                <button onclick="toggleModal('delivery-modal', false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+                <button onclick="toggleModal('delivery-modal', false)"
+                    class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
             </div>
             <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-6 scrollbar-thin">
                 <p class="font-semibold text-[#00f3ff]">Última atualização: Junho de 2026</p>
-                <p>A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas especificamente ao aplicativo mobile <strong>Delivery Sort</strong>.</p>
+                <p>A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas
+                    especificamente ao aplicativo mobile <strong>Delivery Sort</strong>.</p>
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta e Uso de Informações</h4>
-                    <p class="text-gray-400">O jogo <em>Delivery Sort</em> foi projetado para focar puramente na experiência de jogabilidade. Armazenamos de forma estritamente local (no seu dispositivo) ou via serviços nativos da plataforma (Google Play Games / Apple Game Center):</p>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta e Uso de Informações
+                    </h4>
+                    <p class="text-gray-400">O jogo <em>Delivery Sort</em> foi projetado para focar puramente na
+                        experiência de jogabilidade. Armazenamos de forma estritamente local (no seu dispositivo) ou via
+                        serviços nativos da plataforma (Google Play Games / Apple Game Center):</p>
                     <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
                         <li>Pontuações máximas (Highscores) e progresso das fases de organização de entregas.</li>
-                        <li>Dados analíticos anônimos de telemetria para otimização de performance e ajustes de balanceamento dos puzzles.</li>
+                        <li>Dados analíticos anônimos de telemetria para otimização de performance e ajustes de
+                            balanceamento dos puzzles.</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Monetização e Publicidade</h4>
-                    <p class="text-gray-400">Para viabilizar a distribuição gratuita, o aplicativo pode conter redes integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o IDFA ou AAID) para fins de conformidade e relevância de exibição.</p>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Monetização e Publicidade
+                    </h4>
+                    <p class="text-gray-400">Para viabilizar a distribuição gratuita, o aplicativo pode conter redes
+                        integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o
+                        IDFA ou AAID) para fins de conformidade e relevância de exibição.</p>
                 </div>
                 <div>
                     <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">3. Direitos e Contato</h4>
-                    <p class="text-gray-400">O usuário detém total controle sobre a limpeza de dados locais do aplicativo através das configurações padrão do sistema operacional do smartphone.</p>
+                    <p class="text-gray-400">O usuário detém total controle sobre a limpeza de dados locais do
+                        aplicativo através das configurações padrão do sistema operacional do smartphone.</p>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
-                <button onclick="toggleModal('delivery-modal', false)" class="font-gaming border border-[#00f3ff] text-[#00f3ff] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#00f3ff] hover:text-black transition-all duration-300">
+                <button onclick="toggleModal('delivery-modal', false)"
+                    class="font-gaming border border-[#00f3ff] text-[#00f3ff] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#00f3ff] hover:text-black transition-all duration-300">
                     Fechar Terminal
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="botao-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
-        <div class="bg-[#121214] border-2 border-[#9d4edd] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(157,78,221,0.2)]">
+    <div id="botao-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div
+            class="bg-[#121214] border-2 border-[#9d4edd] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(157,78,221,0.2)]">
             <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
                 <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
-                    POLÍTICA DE PRIVACIDADE <span class="text-[#9d4edd] block md:inline text-sm md:text-xl font-normal md:ml-2">[ BOTÃO CUP 2026 ]</span>
+                    POLÍTICA DE PRIVACIDADE <span
+                        class="text-[#9d4edd] block md:inline text-sm md:text-xl font-normal md:ml-2">[ BOTÃO CUP 2026
+                        ]</span>
                 </h3>
-                <button onclick="toggleModal('botao-modal', false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+                <button onclick="toggleModal('botao-modal', false)"
+                    class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
             </div>
             <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-6 scrollbar-thin">
                 <p class="font-semibold text-[#9d4edd]">Última atualização: Julho de 2026</p>
-                <p>A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas especificamente ao jogo <strong>Botão Cup 2026</strong>.</p>
+                <p>A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas
+                    especificamente ao jogo <strong>Botão Cup 2026</strong>.</p>
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta e Uso de Informações</h4>
-                    <p class="text-gray-400">O jogo <em>Botão Cup 2026</em> foi projetado para focar puramente na experiência de jogabilidade e competição. Armazenamos de forma estritamente local (no seu dispositivo) ou via serviços nativos da plataforma:</p>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta e Uso de Informações
+                    </h4>
+                    <p class="text-gray-400">O jogo <em>Botão Cup 2026</em> foi projetado para focar puramente na
+                        experiência de jogabilidade e competição. Armazenamos de forma estritamente local (no seu
+                        dispositivo) ou via serviços nativos da plataforma:</p>
                     <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
                         <li>Progresso dos torneios, resultados das partidas e estatísticas das equipes.</li>
-                        <li>Dados analíticos anônimos de telemetria para otimização de performance e balanceamento da jogabilidade.</li>
+                        <li>Dados analíticos anônimos de telemetria para otimização de performance e balanceamento da
+                            jogabilidade.</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Monetização e Publicidade</h4>
-                    <p class="text-gray-400">Para viabilizar a distribuição gratuita, o aplicativo pode conter redes integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o IDFA ou AAID) para fins de conformidade e relevância de exibição.</p>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Monetização e Publicidade
+                    </h4>
+                    <p class="text-gray-400">Para viabilizar a distribuição gratuita, o aplicativo pode conter redes
+                        integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o
+                        IDFA ou AAID) para fins de conformidade e relevância de exibição.</p>
                 </div>
                 <div>
                     <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">3. Direitos e Contato</h4>
-                    <p class="text-gray-400">O usuário detém total controle sobre a limpeza de dados locais do aplicativo através das configurações padrão do sistema operacional do smartphone.</p>
+                    <p class="text-gray-400">O usuário detém total controle sobre a limpeza de dados locais do
+                        aplicativo através das configurações padrão do sistema operacional do smartphone.</p>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
-                <button onclick="toggleModal('botao-modal', false)" class="font-gaming border border-[#9d4edd] text-[#9d4edd] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#9d4edd] hover:text-black transition-all duration-300">
+                <button onclick="toggleModal('botao-modal', false)"
+                    class="font-gaming border border-[#9d4edd] text-[#9d4edd] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#9d4edd] hover:text-black transition-all duration-300">
                     Fechar Terminal
                 </button>
             </div>
@@ -688,8 +836,8 @@
             });
             card.style.perspective = "1000px";
             card.style.transition = "transform 0.1s ease-out";
-            card.addEventListener('mouseleave', () => { 
-                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)'; 
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
                 card.style.transition = "transform 0.5s ease";
             });
         });
@@ -713,7 +861,7 @@
                     modal.classList.add('hidden');
                 }, 300);
                 document.body.style.overflow = '';
-                
+
                 if (window.location.hash === '#privacy' || window.location.hash === '#privacyDeliverySort' || window.location.hash === '#privacyBotaoCup') {
                     history.replaceState(null, null, ' ');
                 }
@@ -754,7 +902,7 @@
             carousel.style.scrollSnapType = 'x mandatory'; // reativa o snap magnético
         });
         carousel.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
+            if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - carousel.offsetLeft;
             const walk = (x - startX) * 1.5; // velocidade do arraste
@@ -766,18 +914,18 @@
         const submitBtn = document.getElementById('submit-btn');
         const successMessage = document.getElementById('success-message');
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault(); // Impede o redirecionamento padrão da página
 
             // Altera o estado do botão para indicar processamento
             submitBtn.disabled = true;
             submitBtn.innerText = "TRANSMITINDO...";
             submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        
+
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
-        
+
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
@@ -786,26 +934,26 @@
                 },
                 body: json
             })
-            .then(async (response) => {
-                let res = await response.json();
-                if (response.status == 200) {
-                    // Sucesso: Esconde o formulário e mostra a tela de sucesso estilizada
-                    form.classList.add('hidden');
-                    successMessage.classList.remove('hidden');
-                    successMessage.classList.add('flex');
-                    form.reset(); // Limpa os campos
-                } else {
-                    // Caso ocorra algum erro na API
-                    console.log(res);
-                    alert("Falha na transmissão: " + res.message);
+                .then(async (response) => {
+                    let res = await response.json();
+                    if (response.status == 200) {
+                        // Sucesso: Esconde o formulário e mostra a tela de sucesso estilizada
+                        form.classList.add('hidden');
+                        successMessage.classList.remove('hidden');
+                        successMessage.classList.add('flex');
+                        form.reset(); // Limpa os campos
+                    } else {
+                        // Caso ocorra algum erro na API
+                        console.log(res);
+                        alert("Falha na transmissão: " + res.message);
+                        resetButton();
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert("Erro de conexão ao transmitir o sinal.");
                     resetButton();
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                alert("Erro de conexão ao transmitir o sinal.");
-                resetButton();
-            });
+                });
         });
 
         function resetButton() {
@@ -816,4 +964,5 @@
 
     </script>
 </body>
+
 </html>

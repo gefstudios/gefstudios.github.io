@@ -91,7 +91,7 @@ export const games: Game[] = [
       'A febre da Copa de 2026 encontra a nostalgia do futebol de mesa. Escolha sua seleção favorita, defina suas táticas e deslize rumo à taça em partidas estratégicas e eletrizantes.',
     icon: '/assets/BotaoCupIcon500.png',
     status: 'production',
-    statusLabel: 'Em Desenvolvimento',
+    statusLabel: 'Teste Fechado',
     privacyPolicy: {
       title: 'POLÍTICA DE PRIVACIDADE',
       subtitle: '[ BOTÃO CUP 2026 ]',
