@@ -135,7 +135,7 @@ export function HomeView(): string {
         Vamos Construir algo <span class="text-[#00f3ff]">Juntos</span>
       </h2>
       <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto scroll-reveal scroll-reveal-up" data-reveal-delay="120">
-        Tem um feedback sobre o Delivery Sort, proposta de parceria ou quer apenas trocar uma ideia? A porta está aberta.
+        Tem um feedback, proposta de parceria ou quer apenas trocar uma ideia? A porta está aberta.
       </p>
 
       <div class="scroll-reveal scroll-reveal-scale" data-reveal-delay="220">
