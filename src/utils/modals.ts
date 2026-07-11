@@ -1,4 +1,4 @@
-const PRIVACY_HASHES = ['#privacy', '#privacyDeliverySort'];
+const PRIVACY_HASHES = ['#privacy', '#privacyDeliverySort', '#privacyBotaoCup'];
 
 export function toggleModal(modalId: string, show: boolean): void {
   const modal = document.getElementById(modalId);
@@ -58,5 +58,9 @@ export function checkPrivacyHash(): void {
 
   if (hash === '#privacyDeliverySort') {
     toggleModal('delivery-modal', true);
+  }
+
+  if (hash === '#privacyBotaoCup') {
+    toggleModal('botao-modal', true);
   }
 }

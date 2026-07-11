@@ -404,6 +404,9 @@
 
                 <div class="flex items-center justify-between">
                     <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#9d4edd] text-[#9d4edd] px-3 py-1 uppercase tracking-wider">Em Desenvolvimento</span>
+                    <a href="#privacyBotaoCup" onclick="toggleModal('botao-modal', true); event.preventDefault();" class="text-xs font-gaming font-bold bg-gray-900 border border-gray-800 text-gray-400 hover:text-[#9d4edd] hover:border-[#9d4edd] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+                        Privacidade
+                    </a>
                 </div>
             </div>
 
@@ -572,6 +575,42 @@
         </div>
     </div>
 
+    <div id="botao-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-blur transition-all duration-300 opacity-0">
+        <div class="bg-[#121214] border-2 border-[#9d4edd] w-full max-w-3xl max-h-[80vh] flex flex-col p-6 md:p-10 shadow-[0_0_30px_rgba(157,78,221,0.2)]">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+                <h3 class="font-gaming text-xl md:text-2xl font-bold text-white tracking-wider uppercase">
+                    POLÍTICA DE PRIVACIDADE <span class="text-[#9d4edd] block md:inline text-sm md:text-xl font-normal md:ml-2">[ BOTÃO CUP 2026 ]</span>
+                </h3>
+                <button onclick="toggleModal('botao-modal', false)" class="text-gray-400 hover:text-red-500 font-gaming text-2xl transition-colors">&times;</button>
+            </div>
+            <div class="overflow-y-auto pr-2 text-gray-300 font-light text-sm md:text-base space-y-6 scrollbar-thin">
+                <p class="font-semibold text-[#9d4edd]">Última atualização: Julho de 2026</p>
+                <p>A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas especificamente ao jogo <strong>Botão Cup 2026</strong>.</p>
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">1. Coleta e Uso de Informações</h4>
+                    <p class="text-gray-400">O jogo <em>Botão Cup 2026</em> foi projetado para focar puramente na experiência de jogabilidade e competição. Armazenamos de forma estritamente local (no seu dispositivo) ou via serviços nativos da plataforma:</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                        <li>Progresso dos torneios, resultados das partidas e estatísticas das equipes.</li>
+                        <li>Dados analíticos anônimos de telemetria para otimização de performance e balanceamento da jogabilidade.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">2. Monetização e Publicidade</h4>
+                    <p class="text-gray-400">Para viabilizar a distribuição gratuita, o aplicativo pode conter redes integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o IDFA ou AAID) para fins de conformidade e relevância de exibição.</p>
+                </div>
+                <div>
+                    <h4 class="font-gaming text-white font-bold uppercase text-md mb-2">3. Direitos e Contato</h4>
+                    <p class="text-gray-400">O usuário detém total controle sobre a limpeza de dados locais do aplicativo através das configurações padrão do sistema operacional do smartphone.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-4 mt-6 flex justify-end">
+                <button onclick="toggleModal('botao-modal', false)" class="font-gaming border border-[#9d4edd] text-[#9d4edd] px-6 py-2 uppercase text-sm tracking-widest hover:bg-[#9d4edd] hover:text-black transition-all duration-300">
+                    Fechar Terminal
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 1. Fundo Canvas com Partículas
         const canvas = document.getElementById('bg-canvas');
@@ -675,7 +714,7 @@
                 }, 300);
                 document.body.style.overflow = '';
                 
-                if (window.location.hash === '#privacy' || window.location.hash === '#privacyDeliverySort') {
+                if (window.location.hash === '#privacy' || window.location.hash === '#privacyDeliverySort' || window.location.hash === '#privacyBotaoCup') {
                     history.replaceState(null, null, ' ');
                 }
             }
@@ -688,6 +727,8 @@
                 toggleModal('general-modal', true);
             } else if (currentHash === '#privacyDeliverySort') {
                 toggleModal('delivery-modal', true);
+            } else if (currentHash === '#privacyBotaoCup') {
+                toggleModal('botao-modal', true);
             }
         }
         window.addEventListener('DOMContentLoaded', checkUrlHash);

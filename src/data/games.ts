@@ -92,6 +92,36 @@ export const games: Game[] = [
     icon: '/assets/BotaoCupIcon500.png',
     status: 'production',
     statusLabel: 'Em Desenvolvimento',
+    privacyPolicy: {
+      title: 'POLÍTICA DE PRIVACIDADE',
+      subtitle: '[ BOTÃO CUP 2026 ]',
+      updatedAt: 'Julho de 2026',
+      intro:
+        'A Gef Studios descreve através deste documento as práticas de tratamento de dados aplicadas especificamente ao jogo Botão Cup 2026.',
+      hash: '#privacyBotaoCup',
+      modalId: 'botao-modal',
+      sections: [
+        {
+          title: '1. Coleta e Uso de Informações',
+          content:
+            'O jogo Botão Cup 2026 foi projetado para focar puramente na experiência de jogabilidade e competição. Armazenamos de forma estritamente local (no seu dispositivo) ou via serviços nativos da plataforma:',
+          list: [
+            'Progresso dos torneios, resultados das partidas e estatísticas das equipes.',
+            'Dados analíticos anônimos de telemetria para otimização de performance e balanceamento da jogabilidade.',
+          ],
+        },
+        {
+          title: '2. Monetização e Publicidade',
+          content:
+            'Para viabilizar a distribuição gratuita, o aplicativo pode conter redes integradas de publicidade que coletam identificadores anônimos de anúncios do sistema (como o IDFA ou AAID) para fins de conformidade e relevância de exibição.',
+        },
+        {
+          title: '3. Direitos e Contato',
+          content:
+            'O usuário detém total controle sobre a limpeza de dados locais do aplicativo através das configurações padrão do sistema operacional do smartphone.',
+        },
+      ],
+    },
   },
   {
     id: 'next-universe-1',
