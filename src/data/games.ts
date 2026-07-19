@@ -131,7 +131,7 @@ export const games: Game[] = [
       'Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.',
     status: 'production',
     statusLabel: 'Alpha',
-    downloadLink: 'https://github.com/gefstudios/gefstudios.github.io/releases/download/v0.0.1/Limiar_v0_0_1.rar',
+    downloadLink: 'https://github.com/gefstudios/gefstudios.github.io/releases/download/v0.0.1/LimiarClient.rar',
   },
   {
     id: 'next-universe-2',
