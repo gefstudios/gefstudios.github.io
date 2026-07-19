@@ -21,6 +21,7 @@ export interface Game {
   statusLabel: string;
   badge?: string;
   storeLinks?: StoreLinks;
+  downloadLink?: string;
   privacyPolicy?: {
     title: string;
     subtitle: string;
@@ -124,12 +125,13 @@ export const games: Game[] = [
     },
   },
   {
-    id: 'next-universe-1',
-    title: 'Próximo Universo',
+    id: 'limiar',
+    title: 'Limiar',
     shortDescription:
       'Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.',
-    status: 'confidential',
-    statusLabel: 'Fase de Briefing',
+    status: 'production',
+    statusLabel: 'Alpha',
+    downloadLink: '/downloads/Limiar/Limiar.rar',
   },
   {
     id: 'next-universe-2',

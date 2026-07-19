@@ -57,17 +57,29 @@ function ProductionGameCard(game: Game, index: number): string {
       </a>`
     : '';
 
+  const downloadLink = game.downloadLink
+    ? `<a href="${game.downloadLink}" download class="text-xs font-gaming font-bold bg-[#9d4edd] border border-[#9d4edd] text-white hover:bg-transparent hover:text-[#9d4edd] px-3 py-1 uppercase tracking-wider transition-all duration-300">
+        Download
+      </a>`
+    : '';
+
+  const actionLink = downloadLink || privacyLink;
+
+  const imageArea = game.icon 
+    ? `<img src="${game.icon}" alt="${game.title}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">`
+    : `<div class="w-full h-full border-2 border-dashed border-gray-800 flex flex-col items-center justify-center group-hover:border-[#9d4edd] transition-colors"><span class="font-gaming text-gray-600 text-xl font-bold tracking-widest group-hover:text-[#9d4edd] transition-colors">[ CONFIDENCIAL ]</span></div>`;
+
   return `
     <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] scroll-reveal scroll-reveal-up group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d" data-reveal-delay="${index * 130}">
       <div class="relative h-64 flex items-center justify-center mb-6">
-        <img src="${game.icon}" alt="${game.title}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out">
+        ${imageArea}
         <span class="absolute top-0 right-0 font-gaming text-xs bg-[#9d4edd] text-white font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-purple)]">TEST</span>
       </div>
       <h3 class="font-gaming text-2xl font-bold text-white mb-2 group-hover:text-[#9d4edd] transition-colors">${game.title}</h3>
       <p class="text-gray-400 mb-4 h-[72px] overflow-hidden text-ellipsis">${game.shortDescription}</p>
       <div class="flex items-center justify-between">
         <span class="inline-block text-xs font-gaming font-bold bg-transparent border border-[#9d4edd] text-[#9d4edd] px-3 py-1 uppercase tracking-wider">${game.statusLabel}</span>
-        ${privacyLink}
+        ${actionLink}
       </div>
     </div>
   `;
