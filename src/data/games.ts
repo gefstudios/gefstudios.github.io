@@ -131,7 +131,7 @@ export const games: Game[] = [
       'Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.',
     status: 'production',
     statusLabel: 'Alpha',
-    downloadLink: '/downloads/Limiar/Limiar.rar',
+    downloadLink: '/downloads/Limiar/Limiar_v0_0_1.rar',
   },
   {
     id: 'next-universe-2',
