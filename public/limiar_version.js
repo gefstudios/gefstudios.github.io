@@ -1,0 +1,4 @@
+{
+  "version": "0.0.2",
+  "url": "https://github.com/gefstudios/gefstudios.github.io/releases/download/v0.0.2/Limiar_v0.0.1.rar"
+}
