@@ -9,6 +9,7 @@ export interface PrivacySection {
 export interface StoreLinks {
   googlePlay?: string;
   appStore?: string;
+  directDownload?: string;
 }
 
 export interface Game {
@@ -128,10 +129,22 @@ export const games: Game[] = [
     id: 'limiar',
     title: 'Limiar',
     shortDescription:
-      'Novas ideias já estão sendo prototipadas na nossa incubadora de realidades virtuais.',
-    status: 'production',
+      'Um MMORPG medieval hardcore com economia focada em reparo de equipamentos e combates implacáveis onde a morte tem um preço alto.',
+    longDescription:
+      'Limiar transporta você para um universo MMORPG medieval brutal e implacável. Nele, a economia gira em torno de um complexo sistema de durabilidade, onde o próprio item de reparo se tornou a principal moeda corrente. Cada exploração é um risco calculado: morrer em combate significa correr o risco real de perder seus equipamentos mais valiosos. Forje alianças, gerencie seus recursos e sobreviva em um mundo onde cada erro pode ser o seu fim.',
+    icon: '/assets/limiar-icone.png',
+    status: 'live',
     statusLabel: 'Alpha',
-    downloadLink: 'https://github.com/gefstudios/gefstudios.github.io/releases/download/v0.0.1/LimiarClient.rar',
+    badge: 'TEST',
+    storeLinks: {
+      directDownload: '/downloads/limiar/LimiarLauncher.exe',
+    },
+    features: [
+      'Mundo aberto de MMORPG com profunda temática medieval',
+      'Sistema econômico inovador centrado em itens de reparo como moeda',
+      'Gerenciamento crucial de desgaste e durabilidade de equipamentos',
+      'Combate hardcore (Full Loot / Partial Loot) com risco de perda de itens ao morrer',
+    ],
   },
   {
     id: 'next-universe-2',
@@ -152,5 +165,5 @@ export function getGameDownloadPath(id: string): string {
 }
 
 export function hasStoreLink(game: Game): boolean {
-  return Boolean(game.storeLinks?.googlePlay || game.storeLinks?.appStore);
+  return Boolean(game.storeLinks?.googlePlay || game.storeLinks?.appStore || game.storeLinks?.directDownload);
 }

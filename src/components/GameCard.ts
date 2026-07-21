@@ -15,9 +15,14 @@ export function GameCard(game: Game, index = 0): string {
       </a>`
     : '';
 
-  const badge = game.badge
-    ? `<span class="absolute top-0 right-0 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">${game.badge}</span>`
-    : '';
+  let badge = '';
+  if (game.badge) {
+    if (game.badge === 'TEST') {
+      badge = `<span class="absolute top-0 right-0 font-gaming text-xs bg-[#9d4edd] text-white font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-purple)]">${game.badge}</span>`;
+    } else {
+      badge = `<span class="absolute top-0 right-0 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider z-20 shadow-[0_0_10px_var(--neon-cyan)]">${game.badge}</span>`;
+    }
+  }
 
   return `
     <div class="carousel-item flex-shrink-0 w-[85vw] md:w-[380px] scroll-reveal scroll-reveal-up group relative bg-[#121214] border border-gray-800 p-4 rounded-none transition-all duration-300 neon-border card-3d" data-reveal-delay="${index * 130}">

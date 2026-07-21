@@ -14,17 +14,16 @@ export function GameDetailsView(game: Game): string {
     `
     : '';
 
-  const storeButtons = hasStoreLink(game)
-    ? [
-        game.storeLinks?.googlePlay || game.storeLinks?.appStore
-          ? `<a href="${getGameDownloadPath(game.id)}" class="font-gaming bg-[#00f3ff] text-black px-6 py-3 uppercase text-sm tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)]">
-              Baixar Grátis
-            </a>`
-          : '',
-      ]
-        .filter(Boolean)
-        .join('')
-    : '';
+  let storeButtons = '';
+  if (hasStoreLink(game)) {
+    const isDirect = !!game.storeLinks?.directDownload;
+    const href = isDirect ? game.storeLinks.directDownload : getGameDownloadPath(game.id);
+    const downloadAttr = isDirect ? 'download' : '';
+    
+    storeButtons = `<a href="${href}" ${downloadAttr} class="font-gaming bg-[#00f3ff] text-black px-6 py-3 uppercase text-sm tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)]">
+        Baixar Grátis
+      </a>`;
+  }
 
   const storeSection = storeButtons
     ? `<div class="flex flex-wrap gap-4 pt-2">${storeButtons}</div>`
@@ -42,6 +41,15 @@ export function GameDetailsView(game: Game): string {
         <span class="font-gaming text-gray-600 text-xl font-bold tracking-widest">[ CONFIDENCIAL ]</span>
       </div>`;
 
+  let badgeHtml = '';
+  if (game.badge) {
+    if (game.badge === 'TEST') {
+      badgeHtml = `<span class="absolute top-4 right-4 font-gaming text-xs bg-[#9d4edd] text-white font-black px-2 py-1 tracking-wider shadow-[0_0_10px_var(--neon-purple)]">${game.badge}</span>`;
+    } else {
+      badgeHtml = `<span class="absolute top-4 right-4 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider shadow-[0_0_10px_var(--neon-cyan)]">${game.badge}</span>`;
+    }
+  }
+
   return `
     ${Header()}
 
@@ -52,7 +60,7 @@ export function GameDetailsView(game: Game): string {
 
       <div class="grid md:grid-cols-2 gap-12 items-start reveal">
         <div class="bg-[#121214] border border-gray-800 p-6 relative">
-          ${game.badge ? `<span class="absolute top-4 right-4 font-gaming text-xs bg-[#00f3ff] text-black font-black px-2 py-1 tracking-wider shadow-[0_0_10px_var(--neon-cyan)]">${game.badge}</span>` : ''}
+          ${badgeHtml}
           ${iconSection}
         </div>
 

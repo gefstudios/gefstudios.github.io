@@ -3,14 +3,37 @@ import { Header } from '../components/Header';
 import type { Game } from '../data/games';
 
 export function GameStoreView(game: Game): string {
-  const storeUrl = game.storeLinks?.googlePlay ?? game.storeLinks?.appStore;
+  const storeUrl = game.storeLinks?.googlePlay ?? game.storeLinks?.appStore ?? game.storeLinks?.directDownload;
 
   if (!storeUrl) {
     return '';
   }
 
-  const storeName = game.storeLinks?.googlePlay ? 'Google Play Store' : 'App Store';
-  const storeBadge = game.storeLinks?.googlePlay ? 'Google Play' : 'App Store';
+  let storeName = 'Nossos Servidores';
+  let storeBadge = 'Arquivo Direto';
+  let isDirectDownload = false;
+  let storeIconSvg = `
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+  `;
+
+  if (game.storeLinks?.googlePlay) {
+    storeName = 'Google Play Store';
+    storeBadge = 'Google Play';
+    storeIconSvg = `
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3.6 2.4c-.3.3-.6.8-.6 1.4v16.4c0 .6.3 1.1.6 1.4l.1.1 9.2-9.2v-.2L3.7 2.3l-.1.1zm10.4 10.4-2.8 2.8 3.9 2.2c1.1.6 2 .1 2.4-.7l.1-.2v-1.4l-3.6-2.7zm0-3.4L18.5 6c.5-.3.9-.9.5-1.6-.4-.7-1.2-.9-2-.5l-9 5.1 2.8 2.8 3.2-3.2zM4.8 1.6 14.2 7l3.2-3.2L6.4 1.1c-.8-.5-1.6-.2-2 .4-.1.1-.1.1-.6.1z"/>
+      </svg>
+    `;
+  } else if (game.storeLinks?.appStore) {
+    storeName = 'App Store';
+    storeBadge = 'App Store';
+  } else if (game.storeLinks?.directDownload) {
+    isDirectDownload = true;
+  }
 
   const features = game.features
     ? game.features
@@ -57,14 +80,11 @@ export function GameStoreView(game: Game): string {
           <div class="space-y-4">
             <a
               href="${storeUrl}"
-              target="_blank"
-              rel="noopener noreferrer"
+              ${isDirectDownload ? 'download' : 'target="_blank" rel="noopener noreferrer"'}
               data-store-redirect
               class="group flex items-center justify-center gap-3 w-full font-gaming bg-[#00f3ff] text-black py-4 px-6 uppercase tracking-widest text-sm font-bold hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,243,255,0.35)]"
             >
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M3.6 2.4c-.3.3-.6.8-.6 1.4v16.4c0 .6.3 1.1.6 1.4l.1.1 9.2-9.2v-.2L3.7 2.3l-.1.1zm10.4 10.4-2.8 2.8 3.9 2.2c1.1.6 2 .1 2.4-.7l.1-.2v-1.4l-3.6-2.7zm0-3.4L18.5 6c.5-.3.9-.9.5-1.6-.4-.7-1.2-.9-2-.5l-9 5.1 2.8 2.8 3.2-3.2zM4.8 1.6 14.2 7l3.2-3.2L6.4 1.1c-.8-.5-1.6-.2-2 .4-.1.1-.1.1-.6.1z"/>
-              </svg>
+              ${storeIconSvg}
               Baixar na ${storeBadge}
             </a>
 
