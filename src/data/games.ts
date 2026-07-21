@@ -137,7 +137,7 @@ export const games: Game[] = [
     statusLabel: 'Alpha',
     badge: 'TEST',
     storeLinks: {
-      directDownload: '/downloads/limiar/LimiarLauncher.exe',
+      directDownload: '/downloads/limiar/LimiarLauncher.zip',
     },
     features: [
       'Mundo aberto de MMORPG com profunda temática medieval',
