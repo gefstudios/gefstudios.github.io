@@ -378,26 +378,11 @@ body {
 .carousel-container {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 243, 255, 0.15) transparent;
+  scrollbar-width: none;
 }
 
 .carousel-container::-webkit-scrollbar {
-  display: block;
-  height: 4px;
-}
-
-.carousel-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.carousel-container::-webkit-scrollbar-thumb {
-  background: rgba(0, 243, 255, 0.15);
-  border-radius: 999px;
-}
-
-.carousel-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 243, 255, 0.35);
+  display: none;
 }
 
 .carousel-item {

@@ -77,4 +77,19 @@ export function initCarouselDrag(): void {
     const walk = (x - startX) * 1.5;
     carousel.scrollLeft = scrollLeft - walk;
   });
+
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -400, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: 400, behavior: 'smooth' });
+    });
+  }
 }
