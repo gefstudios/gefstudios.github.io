@@ -17,7 +17,7 @@ export function GameDetailsView(game: Game): string {
   let storeButtons = '';
   if (hasStoreLink(game)) {
     const isDirect = !!game.storeLinks?.directDownload;
-    const href = isDirect ? game.storeLinks.directDownload : getGameDownloadPath(game.id);
+    const href = game.storeLinks?.directDownload || getGameDownloadPath(game.id);
     const downloadAttr = isDirect ? 'download' : '';
     
     storeButtons = `<a href="${href}" ${downloadAttr} class="font-gaming bg-[#00f3ff] text-black px-6 py-3 uppercase text-sm tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)]">
